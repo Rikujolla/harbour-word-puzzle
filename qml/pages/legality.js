@@ -1,3 +1,4 @@
+// The function hides impossible letters.
 function hideImpossible(ind) {
 
     var sarake = ind%4 + 1
