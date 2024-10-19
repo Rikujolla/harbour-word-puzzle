@@ -6,7 +6,6 @@ ApplicationWindow {
     initialPage: Component { PuzzlePage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
-
     property bool developer: true //Developer setting to prevent console logs in production
 
     ListModel {
