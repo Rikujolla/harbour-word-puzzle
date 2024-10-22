@@ -95,16 +95,59 @@ Page {
 
                             }
                         } // Image
-                        /*Text {
-                             anchors.fill:parent
-                             id: myText
-                             font.family: "Helvetica"
-                             font.pointSize: 50
-                             text:  qsTr("A")
-                         }*/
-
                     }
 
+                }
+            }
+            BackgroundItem {
+                width: page.width
+                height:page.width
+                GridView {
+                    id:grid2
+                    cellWidth: page.width/4
+                    cellHeight: page.width/4
+                    anchors.fill: parent
+                    model:letterModel
+                    delegate: Rectangle {
+                        id:rec2
+                        width: grid.cellWidth
+                        height:grid.cellHeight
+                        border.width: 3
+                        border.color: "black"
+                        Canvas {
+                            id:canvaas
+                            width: grid2.cellWidth; height: grid2.cellHeight
+                            contextType: "2d"
+                            onPaint: {
+                                var ctx = getContext("2d");
+                                ctx.fillStyle = Qt.rgba(1, 1, 0, 1);
+                                ctx.strokeStyle = "blue";
+                                ctx.lineWidth = "4";
+                                //ctx.fillRect(0, 0, width, height);
+                                ctx.rect(0, 0, width, height);
+                                //ctx.stroke();
+                                ctx.fillStyle = "#ff0000";
+                                ctx.font='150px Sail Sans Pro';
+                                //ctx.font = '30px Sail Sans Pro';
+                                ctx.textAlign = "center";
+                                ctx.fillText(letter, width/2, height-25);
+                                ctx.restore();
+                            }
+                            MouseArea {
+                                anchors.fill: parent
+                                height: grid2.cellHeight
+                                width: grid2.cellWidth
+                                enabled: possible == 1 && temp_possible == 1
+                                onClicked: {
+                                    currentWord = currentWord + letterModel.get(index).letter
+                                    if (developer) {console.log("currentWord")}
+                                    possible = 0
+                                    //letterModel.set(index,{"possible":0})
+                                    Mylegal.hideImpossible(index)
+                                }
+                            }
+                        }
+                    } // Image
                 }
             }
 
@@ -134,21 +177,6 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 text: {words}
-            }
-            Canvas {
-                width: 200; height: 200
-                contextType: "2d"
-                onPaint: {
-                    var ctx = getContext("2d");
-                    ctx.fillStyle = Qt.rgba(1, 1, 0, 1);
-                    ctx.fillRect(0, 0, width, height);
-                    ctx.fillStyle = "#ff0000"
-                    ctx.font='100px Courier'
-                    //ctx.font = '30px Courier New'
-                    ctx.textAlign = "center";
-                    ctx.fillText("A", 100, 100);
-                    ctx.restore();
-                }
             }
         }
     }

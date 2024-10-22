@@ -21,8 +21,8 @@ DISTFILES += qml/harbour-word-puzzle.qml \
     qml/cover/CoverPage.qml \
     qml/pages/PuzzlePage.qml \
     qml/pages/ResultsPage.qml \
-    rpm/harbour-word-puzzle.changes.in \
-    rpm/harbour-word-puzzle.changes.run.in \
+    rpm/harbour-word-puzzle.changes \
+    rpm/harbour-word-puzzle.changes.run \
     rpm/harbour-word-puzzle.spec \
     translations/*.ts \
     harbour-word-puzzle.desktop
