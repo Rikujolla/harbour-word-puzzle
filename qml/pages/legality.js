@@ -13,9 +13,9 @@ function hideImpossible(ind) {
         if (Math.abs(rivi_i-rivi) > 1) {
             letterModel.set(i,{"temp_possible":0})
         }
-        else if (Math.abs(sarake_i-sarake) == 1 && Math.abs(rivi_i-rivi) == 1) {
-            letterModel.set(i,{"temp_possible":0})
-        }
+        //else if (Math.abs(sarake_i-sarake) == 1 && Math.abs(rivi_i-rivi) == 1) {
+        //    letterModel.set(i,{"temp_possible":0})
+        //}
         else if (Math.abs(sarake_i-sarake) > 1) {
             letterModel.set(i,{"temp_possible":0})
         }
