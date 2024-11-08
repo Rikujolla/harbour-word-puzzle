@@ -13,8 +13,8 @@ Name[de]=harbour-word-puzzle
 
 [X-Sailjail]
 # Replace with your organization as a reverse domain name
-OrganizationName=org.myorg
+OrganizationName=fi.rikujolla
 # ApplicationName does not have to be identical to Name
-ApplicationName=word-puzzle
+ApplicationName=Word Puzzle
 # Add the required permissions here
-Permissions=
+Permissions= Internet

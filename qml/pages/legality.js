@@ -3,8 +3,8 @@ function hideImpossible(ind) {
 
     var sarake = ind%4 + 1
     var rivi = (ind-ind%4)/4 + 1
-    if (developer) {console.log("sarake " + sarake)}
-    if (developer) {console.log("rivi " + rivi)}
+    if (debug) {console.log("sarake " + sarake)}
+    if (debug) {console.log("rivi " + rivi)}
 
     for (var i = 0; i<16; i++ ) {
         var sarake_i = i%4 + 1

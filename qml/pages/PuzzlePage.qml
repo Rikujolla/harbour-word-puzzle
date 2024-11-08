@@ -2,6 +2,9 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "legality.js" as Mylegal
 import "frequencies.js" as Myfreq
+import harbour.word.puzzle.sender 1.0
+import harbour.word.puzzle.receiver 1.0
+
 Page {
     id: page
 
@@ -41,6 +44,12 @@ Page {
                     progress.value = max_time
                     words = ""
                     //canvaas.requestPaint()
+                    if (player_id==1) {
+                        usend.sipadd = player_id + "," + myPlayerName + ",SET,A,0,B,0,C,0,D,0,E,0,F,0,G,0,H,0,I,0,J,0,K,0,L,0,M,0,N,0,O,0,P,0"
+                        usend.broadcastDatagram()
+                    }
+                    else {}
+
                 }
             }
 
@@ -58,6 +67,14 @@ Page {
             spacing: Theme.paddingLarge
             PageHeader {
                 title: qsTr("Word puzzle")
+            }
+
+            UdpSender {
+                id:usend
+            }
+            UdpReceiver {
+                id:urecei
+                //onRmoveChanged: console.log("signal test")
             }
             //BackgroundItem {
             //width: page.width
@@ -125,7 +142,7 @@ Page {
                                 enabled: possible == 1 && temp_possible == 1 && progress.value > 0
                                 onClicked: {
                                     currentWord = currentWord + letterModel.get(index).letter
-                                    if (developer) {console.log(currentWord)}
+                                    if (debug) {console.log(currentWord)}
                                     possible = 0
                                     Mylegal.hideImpossible(index)
                                 }
@@ -140,13 +157,22 @@ Page {
                 icon.source: "image://theme/icon-m-enter-next"
                 enabled: progress.value > 0
                 onClicked: {
-                    if (developer) {console.log(currentWord)}
+                    if (debug) {console.log(currentWord)}
                     if (words == "") {words = words + currentWord}
                     else {words = words + ", " + currentWord}
                     currentWord = ""
                     for (var i = 0; i<16; i++ ) {
                         letterModel.set(i,{"possible":1})
                         letterModel.set(i,{"temp_possible":1})
+                    }
+                    if (player_id > 1) {
+                        usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
+                        usend.broadcastDatagram()}
+                    else {
+                        usend.sipadd = player_id + "," + myPlayerName + ",SET,A,0,B,0,C,0,D,0,E,0,F,0,G,0,H,0,I,0,J,0,K,0,L,0,M,0,N,0,O,0,P,0"
+                        usend.broadcastDatagram()
+                        usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
+                        usend.broadcastDatagram()
                     }
                 }
             }

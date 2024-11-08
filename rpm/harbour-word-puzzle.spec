@@ -1,7 +1,7 @@
 Name:       harbour-word-puzzle
 
 Summary:    Word puzzle application
-Version:    0.0.4
+Version:    0.0.5
 Release:    1
 License:    LICENSE
 URL:        http://example.org/

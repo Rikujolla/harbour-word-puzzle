@@ -84,6 +84,13 @@
     </message>
 </context>
 <context>
+    <name>Receiver</name>
+    <message>
+        <source>%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ResultsPage</name>
     <message>
         <source>Nested Page</source>

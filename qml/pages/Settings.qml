@@ -27,7 +27,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.LocalStorage 2.0
 import Sailfish.Pickers 1.0
-//import harbour.memory.sender 1.0
+import harbour.word.puzzle.sender 1.0
 import "./settings.js" as Mysets
 
 Page {
@@ -75,9 +75,10 @@ Page {
                 title: qsTr("Settings page")
             }
 
-            /*UdpSender {
+            UdpSender {
                 id:usend
-            }*/
+            }
+
             SectionHeader { text: qsTr("Time settings")}
 
             Row {

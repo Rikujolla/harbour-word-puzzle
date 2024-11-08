@@ -14,7 +14,9 @@ TARGET = harbour-word-puzzle
 
 CONFIG += sailfishapp
 
-SOURCES += src/harbour-word-puzzle.cpp
+SOURCES += src/harbour-word-puzzle.cpp \
+    src/receiver.cpp \
+    src/sender.cpp
 
 DISTFILES += qml/harbour-word-puzzle.qml \
     README.md \
@@ -38,3 +40,7 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-word-puzzle-de.ts
+
+HEADERS += \
+    src/receiver.h \
+    src/sender.h

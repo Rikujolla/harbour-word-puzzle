@@ -1,6 +1,6 @@
 function saveSettings() {
 
-    var db = LocalStorage.openDatabaseSync("MemoryDB", "1.0", "Memory database", 1000000);
+    var db = LocalStorage.openDatabaseSync("WordPuzzleDB", "1.0", "Memory database", 1000000);
 
     db.transaction(
                 function(tx) {
@@ -30,7 +30,7 @@ function saveSettings() {
 
 function loadSettings() {
 
-    var db = LocalStorage.openDatabaseSync("MemoryDB", "1.0", "Memory database", 1000000);
+    var db = LocalStorage.openDatabaseSync("WordPuzzleDB", "1.0", "Memory database", 1000000);
 
     db.transaction(
                 function(tx) {
