@@ -2,6 +2,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "legality.js" as Mylegal
 import "frequencies.js" as Myfreq
+import "analyze.js" as Myan
 import harbour.word.puzzle.sender 1.0
 import harbour.word.puzzle.receiver 1.0
 
@@ -38,21 +39,29 @@ Page {
             MenuItem {
                 text: qsTr("Start")
                 onClicked: {
-                    //Myfreq.findLetters("finnish")
+                    Myfreq.findLetters("finnish")
                     p_timer = true
                     time_current = 0
                     progress.value = max_time
                     words = ""
                     //canvaas.requestPaint()
-                    if (player_id==1) {
-                        usend.sipadd = player_id + "," + myPlayerName + ",SET,A,0,B,0,C,0,D,0,E,0,F,0,G,0,H,0,I,0,J,0,K,0,L,0,M,0,N,0,O,0,P,0"
+                    if (status == 0 && player_id==1) {
+                        //usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
+                        //usend.broadcastDatagram()
+                        usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
                         usend.broadcastDatagram()
-                    }
-                    else {}
 
+                    }
+                    else {
+                        //usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
+                        //usend.broadcastDatagram()
+                        usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
+                        usend.broadcastDatagram()
+
+                    }
+                    commTimer.stop
                 }
             }
-
         }
 
         // Tell SilicaFlickable the height of its content.
@@ -74,7 +83,11 @@ Page {
             }
             UdpReceiver {
                 id:urecei
-                //onRmoveChanged: console.log("signal test")
+                onRmoveChanged: {
+                    //console.log("signal test " + rmove)
+                    Myan.analyze(rmove)
+
+                }
             }
             //BackgroundItem {
             //width: page.width
@@ -169,7 +182,7 @@ Page {
                         usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
                         usend.broadcastDatagram()}
                     else {
-                        usend.sipadd = player_id + "," + myPlayerName + ",SET,A,0,B,0,C,0,D,0,E,0,F,0,G,0,H,0,I,0,J,0,K,0,L,0,M,0,N,0,O,0,P,0"
+                        usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
                         usend.broadcastDatagram()
                         usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
                         usend.broadcastDatagram()
@@ -190,6 +203,34 @@ Page {
                 }
                 text: {words}
             }
+
+            SectionHeader { text: qsTr("Players") }
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: parent.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: {playerlist}
+            }
+
         }
+
+    Timer {
+        id:commTimer
+        running: true
+        repeat: true
+        interval: 3000
+        onTriggered: {
+            usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
+            usend.broadcastDatagram()
+
+        }
+    }
+
     }
 }

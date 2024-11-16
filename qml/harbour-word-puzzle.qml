@@ -26,6 +26,9 @@ ApplicationWindow {
     property int roundNumber:0 //Round number (same for every player on the same round)
     property int turnNumber: 0 // Turn number (depending on amount of the players)
     property bool debug: true // In releases, set this false
+    property string playerlist: ""
+    property int status: 0 //0 = not started, 1 = search players or join the play
+    property string letterlist:"" //Perhaps empty string needs to be changed
 
     ListModel {
         id: letterModel

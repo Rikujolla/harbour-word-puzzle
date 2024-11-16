@@ -19,15 +19,17 @@ class Receiver : public QObject
 public:
     explicit Receiver();
     QString rmove(){return myRmove;}
-    void setRmove(QString tee3){
+    void setRmove(const QString &newRmove);
+    /*void setRmove(QString tee3){
         myRmove = tee3;
-        rmoveChanged(myRmove);
-    }
+        emit rmoveChanged(myRmove);
+    }*/
 
     //    Q_INVOKABLE void startReceiver();
     Q_INVOKABLE void processPendingDatagrams();
 signals:
-    void rmoveChanged(QString tee3);
+    void rmoveChanged(const QString &newRmove);
+    //void rmoveChanged(QString tee3);
 
 private slots:
     //void processPendingDatagrams();

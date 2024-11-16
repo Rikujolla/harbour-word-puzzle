@@ -9,12 +9,8 @@
 
 Sender::Sender()
 {
-
-//! [0]
     udpSocket = new QUdpSocket(this);
-//! [0]
-    qDebug() << " Constructor test" << mySipadd << mySport;
-
+    //qDebug() << " Constructor test" << mySipadd << mySport;
 }
 
 void Sender::startSender()
@@ -24,19 +20,39 @@ void Sender::startSender()
     //broadcastDatagram();
 }
 
-void Sender::sendPosition() //sendInitialPosition
+/*void Sender::sendPosition() //sendInitialPosition
 {
     //timer.start(1000);
     qDebug() << "Send initial position" << myCmove;
     QByteArray datagram = myCmove.toUtf8();
     udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
+}*/
+
+QHostAddress Sender::getBroadcastAddress()
+{
+    foreach (const QNetworkInterface &interface, QNetworkInterface::allInterfaces()) {
+        if (interface.flags().testFlag(QNetworkInterface::IsUp) &&
+                interface.flags().testFlag(QNetworkInterface::IsRunning) &&
+                !interface.flags().testFlag(QNetworkInterface::IsLoopBack)) {
+            foreach (const QNetworkAddressEntry &entry, interface.addressEntries()) {
+                if (entry.ip().protocol() == QAbstractSocket::IPv4Protocol) {
+                    return entry.broadcast(); // Return the broadcast address
+                }
+            }
+        }
+    }
+    return QHostAddress::Null;
 }
 
 void Sender::broadcastDatagram() // sendMove
 {
-    qDebug() << "Send move" << mySipadd << mySport;
     QByteArray datagram = mySipadd.toUtf8();
-    udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
-//! [1]
+    QHostAddress broadcastAddress = getBroadcastAddress();
     ++messageNo;
+    if (!broadcastAddress.isNull()) {
+            udpSocket->writeDatagram(datagram, broadcastAddress, 45454);
+            //qDebug() << "Sent move:" << mySipadd << "to broadcast address:" << broadcastAddress.toString();
+        } else {
+            qDebug() << "Failed to determine broadcast address!";
+        }
 }

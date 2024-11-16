@@ -4,6 +4,7 @@
 #ifndef SENDER_H
 #define SENDER_H
 #include <QObject>
+#include <QtNetwork>
 
 #include <QTimer>
 
@@ -38,7 +39,7 @@ public:
       cmoveChanged(myCmove);
     }
     Q_INVOKABLE void startSender();
-    Q_INVOKABLE void sendPosition();
+    //Q_INVOKABLE void sendPosition();
     Q_INVOKABLE void broadcastDatagram();
 
 signals:
@@ -59,6 +60,8 @@ private:
     QString mySipadd;
     int mySport;
     QString myCmove;
+    QHostAddress getBroadcastAddress(); // Function to calculate the broadcast address
+
 };
 
 #endif

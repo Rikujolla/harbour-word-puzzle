@@ -52,8 +52,8 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>My Cover</source>
-        <translation>Mein Cover</translation>
+        <source>Word Puzzle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -82,11 +82,8 @@
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>Receiver</name>
     <message>
-        <source>%1</source>
+        <source>Players</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
