@@ -1,10 +1,10 @@
 Name:       harbour-word-puzzle
 
 Summary:    Word puzzle application
-Version:    0.0.6
+Version:    0.0.7
 Release:    1
 License:    LICENSE
-URL:        http://example.org/
+URL:        http://rikujolla.fi/
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2

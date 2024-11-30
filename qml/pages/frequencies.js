@@ -43,6 +43,7 @@ function findLetters(lang) {
     console.log(finnish.length, finnish[finnish.length-1].less +1)
     // Setting letters
     letterlist = ""
+    letterModel.clear();
     for (var i = 0;i < 16; i++) {
         //var rand = Math.random() * (finnish[finnish.length-1].less +1);
         var rand = Math.random() * (876);

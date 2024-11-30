@@ -23,6 +23,7 @@ DISTFILES += qml/harbour-word-puzzle.qml \
     qml/cover/CoverPage.qml \
     qml/pages/PuzzlePage.qml \
     qml/pages/ResultsPage.qml \
+    qml/pages/ResultsPage2.qml \
     qml/pages/images/analyze.js \
     rpm/harbour-word-puzzle.changes \
     rpm/harbour-word-puzzle.changes.run.in \

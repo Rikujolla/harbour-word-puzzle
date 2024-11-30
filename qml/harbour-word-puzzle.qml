@@ -9,7 +9,8 @@ import "pages/frequencies.js" as Myfreq
 ApplicationWindow {
     initialPage: Component { PuzzlePage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
-    allowedOrientations: defaultAllowedOrientations
+    allowedOrientations: Orientation.Portrait
+    //_defaultPageOrientations: Orientation.Portrait
     // Global variables
     property int max_time : 120
 
@@ -29,6 +30,7 @@ ApplicationWindow {
     property string playerlist: ""
     property int status: 0 //0 = not started, 1 = search players or join the play
     property string letterlist:"" //Perhaps empty string needs to be changed
+    property string zeropointwords: "" //Words that all the players had giving zero points
 
     ListModel {
         id: letterModel
@@ -40,8 +42,26 @@ ApplicationWindow {
         }
     }
 
+    ListModel {
+        id: wordModel
+        ListElement {
+            word: "ABC"
+            mypoints : 1
+            players: "P1, P2, P3"
+        }
+    }
+
+    ListModel {
+        id:pointsModel
+        ListElement {
+            player:""
+            points:0
+        }
+    }
+
     Component.onCompleted: {
         Myfreq.findLetters("finnish")
+        Mysets.clearTables()
         Mysets.loadSettings()
 
     }

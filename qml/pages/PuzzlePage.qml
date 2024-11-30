@@ -1,5 +1,6 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
+import QtQuick.LocalStorage 2.0
 import "legality.js" as Mylegal
 import "frequencies.js" as Myfreq
 import "analyze.js" as Myan
@@ -37,6 +38,10 @@ Page {
                 onClicked: pageStack.animatorPush(Qt.resolvedUrl("ResultsPage.qml"))
             }
             MenuItem {
+                text: qsTr("Results2")
+                onClicked: pageStack.animatorPush(Qt.resolvedUrl("ResultsPage2.qml"))
+            }
+            MenuItem {
                 text: qsTr("Start")
                 onClicked: {
                     Myfreq.findLetters("finnish")
@@ -48,6 +53,7 @@ Page {
                     if (status == 0 && player_id==1) {
                         //usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
                         //usend.broadcastDatagram()
+                        Myan.analyze(player_id + "," + myPlayerName + ",SET," + letterlist)// If not networked to ensure
                         usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
                         usend.broadcastDatagram()
 
@@ -55,6 +61,7 @@ Page {
                     else {
                         //usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
                         //usend.broadcastDatagram()
+                        Myan.analyze(player_id + "," + myPlayerName + ",SET," + letterlist)// If not networked to ensure
                         usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
                         usend.broadcastDatagram()
 
@@ -155,7 +162,7 @@ Page {
                                 enabled: possible == 1 && temp_possible == 1 && progress.value > 0
                                 onClicked: {
                                     currentWord = currentWord + letterModel.get(index).letter
-                                    if (debug) {console.log(currentWord)}
+                                    //if (debug) {console.log(currentWord)}
                                     possible = 0
                                     Mylegal.hideImpossible(index)
                                 }
@@ -170,9 +177,9 @@ Page {
                 icon.source: "image://theme/icon-m-enter-next"
                 enabled: progress.value > 0
                 onClicked: {
-                    if (debug) {console.log(currentWord)}
+                    //if (debug) {console.log(currentWord)}
                     if (words == "") {words = words + currentWord}
-                    else {words = words + ", " + currentWord}
+                    else {words = words + "," + currentWord}
                     currentWord = ""
                     for (var i = 0; i<16; i++ ) {
                         letterModel.set(i,{"possible":1})

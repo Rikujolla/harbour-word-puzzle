@@ -1,3 +1,17 @@
+function clearTables () {
+    var db = LocalStorage.openDatabaseSync("WordPuzzleDB", "1.0", "Memory database", 1000000);
+    db.transaction(
+                function(tx) {
+                    // Create the table, if not existing
+                    tx.executeSql('DELETE FROM Words');
+                    tx.executeSql('DELETE FROM Results');
+                }
+                )
+
+}
+
+
+
 function saveSettings() {
 
     var db = LocalStorage.openDatabaseSync("WordPuzzleDB", "1.0", "Memory database", 1000000);

@@ -86,16 +86,51 @@
         <source>Players</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Results2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ResultsPage</name>
     <message>
-        <source>Nested Page</source>
-        <translation type="unfinished">Unterseite</translation>
+        <source>Result Page</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Item</source>
-        <translation type="unfinished">Element</translation>
+        <source>Players</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ResultsPage2</name>
+    <message>
+        <source>Edit data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show day graphics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ranking list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Words, points, players</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Common words for all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
