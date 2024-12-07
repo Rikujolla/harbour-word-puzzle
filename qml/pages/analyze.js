@@ -101,7 +101,25 @@ function fillResults () {
         var _zero_words =""
 
         for (var k = 0;k<rt.rows.length;k++) {
-            if (rt.rows.item(k).player_count == 0) {
+            // Adding common words to the string. If only one player point are counted differently
+            if (rt.rows.item(k).player_count == 0 && _pla_length < 2) {
+                _zero_words = _zero_words + "," + rt.rows.item(k).word
+                wordModel.append({word: rt.rows.item(k).word, mypoints : rt.rows.item(k).player_count + 1, players: rt.rows.item(k).players})
+                for (m = 0;m < _pla_length;m++ ) {
+                    //console.log("osui" , String(rt.rows.item(k).players), _players[m], String(rt.rows.item(k).players).indexOf(_players[m]))
+                    if (String(rt.rows.item(k).players).indexOf(String(_players[m])) !== -1){
+                        pointsModel.set(m,{points:(pointsModel.get(m).points + rt.rows.item(k).player_count) + 1 });
+                        //console.log("osuiko")
+                    }
+                }
+                if (zeropointwords == ""){
+                    zeropointwords = rt.rows.item(k).word
+                }
+                else {
+                    zeropointwords = zeropointwords +  "," + rt.rows.item(k).word
+                }
+            }
+            else if (rt.rows.item(k).player_count == 0) {
                 _zero_words = _zero_words + "," + rt.rows.item(k).word
                 if (zeropointwords == ""){
                     zeropointwords = rt.rows.item(k).word
@@ -113,12 +131,9 @@ function fillResults () {
             else{
                 wordModel.append({word: rt.rows.item(k).word, mypoints : rt.rows.item(k).player_count, players: rt.rows.item(k).players})
                 for (m = 0;m < _pla_length;m++ ) {
-                    //console.log("Players string:", rt.rows.item(k).players);
-                    //console.log(_players[m])
-                    if (String(rt.rows.item(k).players).indexOf(_players[m])){
+                    if (String(rt.rows.item(k).players).indexOf(_players[m]) !== -1){
                         pointsModel.set(m,{points:(pointsModel.get(m).points + rt.rows.item(k).player_count)});
                     }
-
                 }
             }
         }

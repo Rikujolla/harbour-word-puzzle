@@ -56,7 +56,6 @@ Page {
         Item {
             id: sets
             property bool indexUpdater: false;
-            //: Reduce time by 1 minute
             property var labels: [
                 //: Increase time by 10 seconds
                 {lab:qsTr("+10 s")},
@@ -88,27 +87,29 @@ Page {
                     width: page.width /2
                     color: Theme.secondaryHighlightColor
                     font.pixelSize: Theme.fontSizeSmall
-                    text: qsTr("Move time") +" "
+                    text: qsTr("Game endurance") +" " + max_time + "s"
                 }
 
                 Button {
                     text: sets.labels[0].lab
                     width: page.width /6
                     onClicked: {
+                        max_time = max_time + 10
                     }
                 }
                 Button {
                     text: sets.labels[1].lab
                     width: page.width /6
                     onClicked: {
+                        if (max_time> 30) {max_time = max_time - 10}
                     }
                 }
             }
 
 
-            SectionHeader { text: qsTr("Network settings")}
+            SectionHeader { text: qsTr("Player settings")}
 
-            ComboBox {
+            /*ComboBox {
                 id: setOpponent
                 width: parent.width
                 //contentHeight: Theme.paddingMedium
@@ -193,7 +194,7 @@ Page {
 
                     }
                 }
-            }
+            }*/
 
 
             Row {
@@ -263,7 +264,7 @@ Page {
                 }
             }
 
-            Row {
+            /*Row {
                 x: Theme.paddingLarge
                 spacing: Theme.paddingMedium
                 visible: playMode == "othDevice"
@@ -291,97 +292,13 @@ Page {
                         numberOfPlayers = numberPlayers.text
                     }
                 }
-            }
+            }*/
 
-
-            SectionHeader { text: qsTr("View settings")
-            }
-
-            ComboBox {
-                id: setPieces
-                width: parent.width
-                //: The style of the pieces selector
-                label: qsTr("Style of the pieces")
-                currentIndex: pieceStyle
-
-                menu: ContextMenu {
-                    MenuItem {
-                        //: The style of the pieces is unlike
-                        text: qsTr("Unlike")
-                        onClicked: {
-                            pieceStyle = 0
-                            piePat = "images/piece0/"
-                            setPieces.currentIndex = 0
-                        }
-                    }
-                    MenuItem {
-                        //: The style of the pieces is classic
-                        text: qsTr("Classic")
-                        onClicked: {
-                            pieceStyle = 1
-                            piePat = "images/piece1/"
-                            setPieces.currentIndex = 1
-                        }
-                    }
-
-                    MenuItem {
-                        //: Player can select the pieces of her or his choice
-                        text: qsTr("Personal art")
-                        onClicked: {
-                            var dialog = pageStack.push(Qt.resolvedUrl("Settings_dialog_personal_art.qml"),
-                                                        {"name": "test"})
-                            dialog.accepted.connect(function() {
-                                filepicker_timer.start()
-                            })
-                            dialog.rejected.connect(function() {
-                                setPieces.currentIndex = pieceStyle
-                            })
-                        }
-                    }
-                }
-            }
-
-            Timer {
-                id:filepicker_timer
-                interval: 500
-                running: false
-                repeat: false
-
-                onTriggered: pageStack.push(filePickerPage)
-            }
-
-            property string personal_art_filename
-            property string personal_art_path
-
-            Component {
-                id: filePickerPage
-                FilePickerPage {
-                    nameFilters: ['*.png']
-                    onSelectedContentPropertiesChanged: {
-                        column.personal_art_filename = selectedContentProperties.fileName
-                        column.personal_art_path = selectedContentProperties.filePath;
-                        piePat = column.personal_art_path.slice(0,column.personal_art_path.length-column.personal_art_filename.length)
-                        pieceStyle = 2
-                        setPieces.currentIndex = 2
-                    }
-                }
-            }
 
 
 
             VerticalScrollDecorator {}
 
-            // This timer is requested to change currentIndex values to global variables
-            Timer {
-                interval:50
-                running:sets.indexUpdater && Qt.ApplicationActive
-                repeat:true
-                onTriggered: {
-                    openingMode = opsiSettings.currentIndex;
-                    countDirInt = timeCounting.currentIndex;
-                    sets.indexUpdater = false;
-                }
-            }
             //loppusulkeet
         }
     }

@@ -23,7 +23,6 @@ DISTFILES += qml/harbour-word-puzzle.qml \
     qml/cover/CoverPage.qml \
     qml/pages/PuzzlePage.qml \
     qml/pages/ResultsPage.qml \
-    qml/pages/ResultsPage2.qml \
     qml/pages/images/analyze.js \
     rpm/harbour-word-puzzle.changes \
     rpm/harbour-word-puzzle.changes.run.in \
@@ -41,7 +40,8 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-word-puzzle-de.ts
+TRANSLATIONS += translations/harbour-word-puzzle-de.ts \
+    translations/harbour-word-puzzle-fi.ts
 
 HEADERS += \
     src/receiver.h \

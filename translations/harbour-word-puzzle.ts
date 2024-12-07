@@ -86,32 +86,9 @@
         <source>Players</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Results2</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ResultsPage</name>
-    <message>
-        <source>Result Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Players</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ResultsPage2</name>
-    <message>
-        <source>Edit data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show day graphics</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Results</source>
         <translation type="unfinished"></translation>
@@ -121,15 +98,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Common words for all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Words, points, players</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Common words for all</source>
+        <source>Words, points and players</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -145,7 +122,7 @@
     </message>
     <message>
         <source>+10 s</source>
-        <extracomment>Reduce time by 1 minute Increase time by 10 seconds</extracomment>
+        <extracomment>Increase time by 10 seconds</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -162,43 +139,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Move time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Network settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Opponent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Only me</source>
-        <extracomment>Stockfish is a name of the chess engine, more info https://stockfishchess.org/</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Human</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Local network</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Port number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Random</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fixed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Player name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -207,31 +147,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Number of players</source>
+        <source>Game endurance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Style of the pieces</source>
-        <extracomment>The style of the pieces selector</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unlike</source>
-        <extracomment>The style of the pieces is unlike</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Classic</source>
-        <extracomment>The style of the pieces is classic</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Personal art</source>
-        <extracomment>Player can select the pieces of her or his choice</extracomment>
+        <source>Player settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

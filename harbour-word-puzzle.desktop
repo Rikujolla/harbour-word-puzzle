@@ -9,7 +9,8 @@ Name=harbour-word-puzzle
 #
 # Remember to comment out the following line, if you do not want to use
 # a different app name in German locale (de).
-Name[de]=harbour-word-puzzle
+Name[de]=Word Puzzle
+Name[en]=Word Puzzle
 Name[fi]=Sanapeli
 
 

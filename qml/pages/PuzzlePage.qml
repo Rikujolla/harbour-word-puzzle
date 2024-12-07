@@ -38,10 +38,6 @@ Page {
                 onClicked: pageStack.animatorPush(Qt.resolvedUrl("ResultsPage.qml"))
             }
             MenuItem {
-                text: qsTr("Results2")
-                onClicked: pageStack.animatorPush(Qt.resolvedUrl("ResultsPage2.qml"))
-            }
-            MenuItem {
                 text: qsTr("Start")
                 onClicked: {
                     Myfreq.findLetters("finnish")
@@ -116,12 +112,13 @@ Page {
             }
 
             BackgroundItem {
-                width: page.width
-                height:page.width
+                width: page.width*0.9
+                height:page.width*0.9
+                x:page.width*0.05
                 GridView {
                     id:grid
-                    cellWidth: page.width/4
-                    cellHeight: page.width/4
+                    cellWidth: page.width/4*0.9
+                    cellHeight: page.width/4*0.9
                     anchors.fill: parent
                     model:letterModel
                     delegate: Rectangle {
@@ -171,28 +168,44 @@ Page {
                     } // Image
                 }
             }
-
-            IconButton{
-                anchors.right: parent.right
-                icon.source: "image://theme/icon-m-enter-next"
-                enabled: progress.value > 0
-                onClicked: {
-                    //if (debug) {console.log(currentWord)}
-                    if (words == "") {words = words + currentWord}
-                    else {words = words + "," + currentWord}
-                    currentWord = ""
-                    for (var i = 0; i<16; i++ ) {
-                        letterModel.set(i,{"possible":1})
-                        letterModel.set(i,{"temp_possible":1})
+            Row {
+                x: page.width*0.05
+                spacing: page.width*0.9 - leftb.width - rightb.width
+                IconButton{
+                    id:leftb
+                    icon.source: "image://theme/icon-m-back"
+                    enabled: progress.value > 0
+                    onClicked: {
+                        //Clear the word
+                        currentWord = ""
+                        for (var i = 0; i<16; i++ ) {
+                            letterModel.set(i,{"possible":1})
+                            letterModel.set(i,{"temp_possible":1})
+                        }
                     }
-                    if (player_id > 1) {
-                        usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
-                        usend.broadcastDatagram()}
-                    else {
-                        usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
-                        usend.broadcastDatagram()
-                        usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
-                        usend.broadcastDatagram()
+                }
+                IconButton{
+                    id:rightb
+                    icon.source: "image://theme/icon-m-forward"
+                    enabled: progress.value > 0
+                    onClicked: {
+                        //if (debug) {console.log(currentWord)}
+                        if (words == "") {words = words + currentWord}
+                        else {words = words + "," + currentWord}
+                        currentWord = ""
+                        for (var i = 0; i<16; i++ ) {
+                            letterModel.set(i,{"possible":1})
+                            letterModel.set(i,{"temp_possible":1})
+                        }
+                        if (player_id > 1) {
+                            usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
+                            usend.broadcastDatagram()}
+                        else {
+                            usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
+                            usend.broadcastDatagram()
+                            usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
+                            usend.broadcastDatagram()
+                        }
                     }
                 }
             }
@@ -227,17 +240,17 @@ Page {
 
         }
 
-    Timer {
-        id:commTimer
-        running: true
-        repeat: true
-        interval: 3000
-        onTriggered: {
-            usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
-            usend.broadcastDatagram()
+        Timer {
+            id:commTimer
+            running: true && Qt.ApplicationActive
+            repeat: true
+            interval: 3000
+            onTriggered: {
+                usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
+                usend.broadcastDatagram()
 
+            }
         }
-    }
 
     }
 }

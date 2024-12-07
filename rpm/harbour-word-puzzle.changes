@@ -12,6 +12,9 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Dec 7 2024 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.8
+- Version for Github, works when geltly played
+
 * Sat Nov 30 2024 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.7
 - Version for Github, basic funtionality
 
