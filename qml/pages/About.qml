@@ -69,7 +69,7 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 //: The name of the app followed with a version number
-                text: {qsTr("Word puzzle, version") + " 0.0.8"}
+                text: {qsTr("Word puzzle, version") + " 0.0.9"}
             }
 
             SectionHeader { text: qsTr("Idea") }
@@ -83,7 +83,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: {qsTr("The idea of the software is to play with letters.")
+                text: {qsTr("The idea of the game is to make words by selecting letters.")
                 }
             }
 

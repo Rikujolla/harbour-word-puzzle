@@ -4,6 +4,7 @@ import QtQuick.LocalStorage 2.0
 import "legality.js" as Mylegal
 import "frequencies.js" as Myfreq
 import "analyze.js" as Myan
+import "settings.js" as Mysets
 import harbour.word.puzzle.sender 1.0
 import harbour.word.puzzle.receiver 1.0
 
@@ -45,24 +46,23 @@ Page {
                     time_current = 0
                     progress.value = max_time
                     words = ""
+                    myWords = ""
                     //canvaas.requestPaint()
                     if (status == 0 && player_id==1) {
-                        //usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
-                        //usend.broadcastDatagram()
                         Myan.analyze(player_id + "," + myPlayerName + ",SET," + letterlist)// If not networked to ensure
                         usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
                         usend.broadcastDatagram()
 
                     }
                     else {
-                        //usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
-                        //usend.broadcastDatagram()
                         Myan.analyze(player_id + "," + myPlayerName + ",SET," + letterlist)// If not networked to ensure
                         usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
                         usend.broadcastDatagram()
 
                     }
                     commTimer.stop
+                    Mysets.clearTables()
+                    zeropointwords = ""
                 }
             }
         }
@@ -159,6 +159,7 @@ Page {
                                 enabled: possible == 1 && temp_possible == 1 && progress.value > 0
                                 onClicked: {
                                     currentWord = currentWord + letterModel.get(index).letter
+                                    midfield.text = currentWord
                                     //if (debug) {console.log(currentWord)}
                                     possible = 0
                                     Mylegal.hideImpossible(index)
@@ -168,9 +169,12 @@ Page {
                     } // Image
                 }
             }
+
             Row {
+                property int _spacing: (page.width*0.9 - leftb.width - rightb.width - midfield.width)/2
                 x: page.width*0.05
-                spacing: page.width*0.9 - leftb.width - rightb.width
+                spacing: _spacing > 0 ? _spacing : 0
+
                 IconButton{
                     id:leftb
                     icon.source: "image://theme/icon-m-back"
@@ -178,31 +182,45 @@ Page {
                     onClicked: {
                         //Clear the word
                         currentWord = ""
+                        midfield.text = currentWord
                         for (var i = 0; i<16; i++ ) {
                             letterModel.set(i,{"possible":1})
                             letterModel.set(i,{"temp_possible":1})
                         }
                     }
                 }
+
+                TextArea {
+                    id:midfield
+                    width: 0.6*page.width
+                    horizontalAlignment: TextEdit.AlignHCenter
+                    text: currentWord
+
+                }
+
                 IconButton{
                     id:rightb
                     icon.source: "image://theme/icon-m-forward"
                     enabled: progress.value > 0
                     onClicked: {
                         //if (debug) {console.log(currentWord)}
-                        if (words == "") {words = words + currentWord}
-                        else {words = words + "," + currentWord}
+                        Mylegal.addWord(currentWord)
+                        //if (words == "") {words = words + currentWord}
+                        //else {words = words + ", " + currentWord}
                         currentWord = ""
+                        midfield.text = currentWord
                         for (var i = 0; i<16; i++ ) {
                             letterModel.set(i,{"possible":1})
                             letterModel.set(i,{"temp_possible":1})
                         }
                         if (player_id > 1) {
+                            //usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words.replace(", ", ",")
                             usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
                             usend.broadcastDatagram()}
                         else {
-                            usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
-                            usend.broadcastDatagram()
+                            //usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
+                            //usend.broadcastDatagram()
+                            //usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words.replace(", ", ",")
                             usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
                             usend.broadcastDatagram()
                         }
@@ -221,11 +239,12 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: {words}
+                text: {myWords}
             }
 
             SectionHeader { text: qsTr("Players") }
             Text {
+                id:players_list
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap

@@ -74,7 +74,9 @@ Page {
                 }
             }
 
-            SectionHeader { text: qsTr("Words, points and players") }
+            SectionHeader {
+                text: qsTr("Words, points and players")
+            }
 
             ColumnView {
                 id: firstColumn
@@ -106,22 +108,19 @@ Page {
                 }
             }
 
-            SectionHeader { text: qsTr("Common words for all")}
+            SectionHeader {
+                visible: numberOfPlayers > 1
+                text: qsTr("Common words for all")}
 
-            ColumnView {
-                id: secondColumn
-                model:1
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
                 width: parent.width
-                itemHeight: Theme.itemSizeSmall
-
-                delegate: BackgroundItem {
-                    width: parent.width
-                    Label {
-                        text: zeropointwords
-                        x: Theme.paddingLarge
-                        //anchors.centerIn: parent
-                    }
-                }
+                visible:numberOfPlayers > 1
+                text: zeropointwords
+                x: Theme.paddingLarge
+                //anchors.centerIn: parent
             }
 
         }

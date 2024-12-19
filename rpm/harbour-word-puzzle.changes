@@ -12,8 +12,12 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Dec 14 2024 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.9
+- Preventing double words
+- Version for release testing
+
 * Sat Dec 7 2024 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.8
-- Version for Github, works when geltly played
+- Version for Github, works when gently played
 
 * Sat Nov 30 2024 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.7
 - Version for Github, basic funtionality
