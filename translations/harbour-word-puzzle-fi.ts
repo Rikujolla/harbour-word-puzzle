@@ -17,10 +17,6 @@
         <translation>Idea</translation>
     </message>
     <message>
-        <source>The idea of the software is to play with letters.</source>
-        <translation>Sovelluksen idea on muodostaa sanoja kirjaimista.</translation>
-    </message>
-    <message>
         <source>Translations</source>
         <translation>Käännökset</translation>
     </message>
@@ -48,6 +44,10 @@
         <source>Licensed under BSD. License, source code and more information:</source>
         <translation>BSD-lisenssi. Lisenssi, lähdekoodi ja lisätietoja:</translation>
     </message>
+    <message>
+        <source>The idea of the game is to make words by selecting letters.</source>
+        <translation>Pelin ideana on muodostaa sanoja kirjaimista.</translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
@@ -59,32 +59,32 @@
 <context>
     <name>PuzzlePage</name>
     <message>
-        <source>Word puzzle</source>
-        <translation>Sanapeli</translation>
-    </message>
-    <message>
-        <source>Words</source>
-        <translation>Sanat</translation>
-    </message>
-    <message>
-        <source>Results</source>
-        <translation>Tulokset</translation>
-    </message>
-    <message>
-        <source>Start</source>
-        <translation>Käynnistä</translation>
-    </message>
-    <message>
         <source>About</source>
-        <translation>Tietoja</translation>
+        <translation type="unfinished">Tietoja</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Asetukset</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished">Tulokset</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Word puzzle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Players</source>
-        <translation>Pelaajat</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -24,3 +24,27 @@ function hideImpossible(ind) {
         }
     }
 }
+
+function addWord (_word) {
+
+    var db = LocalStorage.openDatabaseSync("WordPuzzleDB", "1.0", "Memory database", 1000000);
+
+    db.transaction(function (tx) {
+        // Create the table if it does not exist
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT)');
+        var rs = tx.executeSql('SELECT * FROM Results WHERE word = ? AND player = ?',[_word, myPlayerName]);
+        // Add word if not duplicate
+        if (rs.rows.length == 0 && _word != "" && _word.length>2){
+            tx.executeSql('INSERT INTO Results (word, player) VALUES (?, ?)', [_word, myPlayerName]);
+            if (words == "") {
+                words = _word
+                myWords = _word //For display to enable wordWrap
+            }
+            else {
+                words = words + "," + _word
+                myWords = myWords + ", " + _word //For display to enable wordWrap
+            }
+        }
+    })
+
+}

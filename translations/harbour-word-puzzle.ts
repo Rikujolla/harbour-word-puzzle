@@ -17,10 +17,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The idea of the software is to play with letters.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Translations</source>
         <translation type="unfinished"></translation>
     </message>
@@ -48,6 +44,10 @@
         <source>Licensed under BSD. License, source code and more information:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The idea of the game is to make words by selecting letters.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
@@ -59,11 +59,11 @@
 <context>
     <name>PuzzlePage</name>
     <message>
-        <source>Word puzzle</source>
+        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Words</source>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -75,11 +75,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About</source>
+        <source>Word puzzle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings</source>
+        <source>Words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

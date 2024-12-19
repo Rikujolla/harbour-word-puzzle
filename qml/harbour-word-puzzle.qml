@@ -22,7 +22,7 @@ ApplicationWindow {
     property string cardPositionString:""
     property string cardMoveString:""
     property int player_id:1 // Default id for playleader 1
-    property int numberOfPlayers:2
+    property int numberOfPlayers:1
     property int currentPlayer:1
     property int roundNumber:0 //Round number (same for every player on the same round)
     property int turnNumber: 0 // Turn number (depending on amount of the players)
@@ -31,6 +31,8 @@ ApplicationWindow {
     property int status: 0 //0 = not started, 1 = search players or join the play
     property string letterlist:"" //Perhaps empty string needs to be changed
     property string zeropointwords: "" //Words that all the players had giving zero points
+    property string myWords:"" //For display to enable wordWrap
+
 
     ListModel {
         id: letterModel
