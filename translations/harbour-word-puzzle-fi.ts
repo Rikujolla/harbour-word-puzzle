@@ -64,6 +64,7 @@
     <name>PuzzlePage</name>
     <message>
         <source>About</source>
+<<<<<<< HEAD
         <translation>Tietoja</translation>
     </message>
     <message>
@@ -85,10 +86,33 @@
     <message>
         <source>Words</source>
         <translation>Sanat</translation>
+=======
+        <translation type="unfinished">Tietoja</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished">Tulokset</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Word puzzle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation type="unfinished"></translation>
+>>>>>>> 60a138b264658855912b8e1f1bbca93613ba17ad
     </message>
     <message>
         <source>Players</source>
-        <translation>Pelaajat</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
