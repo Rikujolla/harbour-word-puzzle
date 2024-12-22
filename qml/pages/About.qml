@@ -51,13 +51,13 @@ Page {
             PageHeader {
                 title: qsTr("About page")
             }
-            /*Image {
+            Image {
                 id: logo
-                source: "./assets/harbour-math-teacher.png"
+                source: "./images/harbour-word-puzzle.png"
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: Screen.width/7
                 width: Screen.width/7
-            }*/
+            }
 
             Label {
                 font.pixelSize: Theme.fontSizeSmall
@@ -69,7 +69,7 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 //: The name of the app followed with a version number
-                text: {qsTr("Word puzzle, version") + " 0.0.9"}
+                text: {qsTr("Word puzzle, version") + " 0.1.0"}
             }
 
             SectionHeader { text: qsTr("Idea") }
@@ -83,7 +83,8 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: {qsTr("The idea of the game is to make words by selecting letters.")
+                text: {qsTr("The idea of the game is to make words by selecting letters.") + " "
+                    + qsTr("The game is at it's best when having multiple players on the same LAN network.")
                 }
             }
 

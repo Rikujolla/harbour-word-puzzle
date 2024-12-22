@@ -11,10 +11,9 @@ import harbour.word.puzzle.receiver 1.0
 Page {
     id: page
 
-    property int time_current: 0 // Value for the progress timer*1000
+    //property int time_current: 0 // Value for the progress timer*1000
     property string currentWord:"" // Word under creation
     property string words:"" // Words, list
-    property bool p_timer:false //
 
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
@@ -36,17 +35,21 @@ Page {
             }
             MenuItem {
                 text: qsTr("Results")
-                onClicked: pageStack.animatorPush(Qt.resolvedUrl("ResultsPage.qml"))
+                onClicked: {
+                    zeropointwords = ""
+                    pageStack.animatorPush(Qt.resolvedUrl("ResultsPage.qml"))
+                }
             }
             MenuItem {
                 text: qsTr("Start")
                 onClicked: {
                     Myfreq.findLetters("finnish")
                     p_timer = true
-                    time_current = 0
+                    //time_current = 0
                     progress.value = max_time
                     words = ""
                     myWords = ""
+                    currentWord = ""
                     //canvaas.requestPaint()
                     if (status == 0 && player_id==1) {
                         Myan.analyze(player_id + "," + myPlayerName + ",SET," + letterlist)// If not networked to ensure
@@ -62,7 +65,13 @@ Page {
                     }
                     commTimer.stop
                     Mysets.clearTables()
-                    zeropointwords = ""
+                    //zeropointwords = ""
+
+                    for (var i = 0; i<16; i++ ) {
+                        letterModel.set(i,{"possible":1})
+                        letterModel.set(i,{"temp_possible":1})
+                    }
+
                 }
             }
         }
@@ -81,15 +90,13 @@ Page {
                 title: qsTr("Word puzzle")
             }
 
-            UdpSender {
+            /*UdpSender {
                 id:usend
-            }
+            }*/
             UdpReceiver {
                 id:urecei
                 onRmoveChanged: {
-                    //console.log("signal test " + rmove)
                     Myan.analyze(rmove)
-
                 }
             }
             //BackgroundItem {
@@ -103,10 +110,13 @@ Page {
                 Timer {
                     id:progress_timer
                     interval: 100
-                    running: p_timer && time_current >= 0
+                    //running: p_timer && time_current >= 0
+                    repeat:true
+                    running: p_timer
                     onTriggered: {
-                        time_current = time_current + progress_timer.interval
+                        //time_current = time_current + progress_timer.interval
                         progress.value = progress.value - interval/1000
+                        //console.log("test")
                     }
                 }
             }
@@ -190,10 +200,13 @@ Page {
                     }
                 }
 
-                TextArea {
+                Text {
                     id:midfield
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
                     width: 0.6*page.width
                     horizontalAlignment: TextEdit.AlignHCenter
+                    enabled: false
                     text: currentWord
 
                 }

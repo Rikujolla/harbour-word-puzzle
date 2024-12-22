@@ -63,7 +63,7 @@ function findLetters(lang) {
             letterModel.set(i,{"letter":finnish[0].letter})
         }*/
 
-        letterModel.set(i,{"possible":1})
+        letterModel.set(i,{"possible":0})
         letterModel.set(i,{"temp_possible":1})
 
         var rand_rot = Math.floor(Math.random()* 4)

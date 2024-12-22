@@ -48,6 +48,10 @@
         <source>The idea of the game is to make words by selecting letters.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The game is at it&apos;s best when having multiple players on the same LAN network.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
@@ -90,6 +94,10 @@
 <context>
     <name>ResultsPage</name>
     <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Results</source>
         <translation type="unfinished"></translation>
     </message>
@@ -98,15 +106,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Common words for all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Words, points and players</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abandoned words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Common words for all</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

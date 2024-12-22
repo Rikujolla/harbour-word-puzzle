@@ -4,6 +4,9 @@ import QtQuick.LocalStorage 2.0
 import "pages"
 import "pages/settings.js" as Mysets
 import "pages/frequencies.js" as Myfreq
+import "pages/analyze.js" as Myan
+import harbour.word.puzzle.sender 1.0
+import harbour.word.puzzle.receiver 1.0
 
 
 ApplicationWindow {
@@ -31,7 +34,10 @@ ApplicationWindow {
     property int status: 0 //0 = not started, 1 = search players or join the play
     property string letterlist:"" //Perhaps empty string needs to be changed
     property string zeropointwords: "" //Words that all the players had giving zero points
+    property string vastedwords:""
     property string myWords:"" //For display to enable wordWrap
+    property bool p_timer:false //
+    property int errortimer: 60000 // To stop error timer
 
 
     ListModel {
@@ -60,6 +66,18 @@ ApplicationWindow {
             points:0
         }
     }
+
+    UdpSender {
+        id:usend
+    }
+
+    /*UdpReceiver {
+        id:urecei
+        onRmoveChanged: {
+            Myan.analyze(rmove)
+        }
+    }*/
+
 
     Component.onCompleted: {
         Myfreq.findLetters("finnish")

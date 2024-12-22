@@ -30,7 +30,7 @@
     </message>
     <message>
         <source>App icon (Riku Lahtinen)</source>
-        <translation>Sovelluksen ikoni</translation>
+        <translation>Sovelluksen ikoni (Riku Lahtinen)</translation>
     </message>
     <message>
         <source>Licence</source>
@@ -48,6 +48,10 @@
         <source>The idea of the game is to make words by selecting letters.</source>
         <translation>Pelin ideana on muodostaa sanoja kirjaimista.</translation>
     </message>
+    <message>
+        <source>The game is at it&apos;s best when having multiple players on the same LAN network.</source>
+        <translation>Peli on parhaimmillaan usean pelaajan pelinä LAN-verkossa.</translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
@@ -60,10 +64,37 @@
     <name>PuzzlePage</name>
     <message>
         <source>About</source>
-        <translation type="unfinished">Tietoja</translation>
+        <translation>Tietoja</translation>
     </message>
     <message>
         <source>Settings</source>
+        <translation>Asetukset</translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation>Tulokset</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Aloita</translation>
+    </message>
+    <message>
+        <source>Word puzzle</source>
+        <translation>Sanapeli</translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation>Sanat</translation>
+    </message>
+    <message>
+        <source>Players</source>
+        <translation>Pelaajat</translation>
+    </message>
+</context>
+<context>
+    <name>ResultsPage</name>
+    <message>
+        <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -71,43 +102,28 @@
         <translation type="unfinished">Tulokset</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Word puzzle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Words</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Players</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ResultsPage</name>
-    <message>
-        <source>Results</source>
-        <translation>Tulokset</translation>
-    </message>
-    <message>
         <source>Ranking list</source>
-        <translation>Tulosluettelo</translation>
-    </message>
-    <message>
-        <source>Common words for all</source>
-        <translation>Kaikille yhteiset sanat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>points</source>
-        <translation>pistettä</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Words, points and players</source>
-        <translation>Sanat, pisteet ja pelaajat</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abandoned words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Common words for all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -22,7 +22,7 @@ function analyze(_move) {
             }
         }
         numberOfPlayers = _playerlist.length
-        players_list.text = playerlist
+        //players_list.text = playerlist
     }
 
     //if (message[2] == "SET" && player_id > 1 ) {
@@ -43,12 +43,29 @@ function analyze(_move) {
             }
         }
         p_timer = true
+        progress.value = max_time
+        currentWord = ""
+        midfield.text = currentWord
+        myWords = ""
+        words = ""
+        for (i = 0; i<16; i++ ) {
+            letterModel.set(i,{"possible":1})
+            letterModel.set(i,{"temp_possible":1})
+        }
+
+        Mysets.clearTables()
     }
 
-    if (message[2]=="WORDS") {
+    if (message[2] == "WORDS") {
         console.log("Words", message[2], message)
         saveWords(_move)
 
+    }
+
+    if (message[2] == "DOWNVOTE") {
+
+        console.log("Downvote", message[2], message)
+        deleteWord(message[3], message[1])
     }
 
 }
@@ -77,15 +94,115 @@ function saveWords(msg) {
     });
 }
 
-function fillResults () {
+function fillResults() {
+    var db = LocalStorage.openDatabaseSync("WordPuzzleDB", "1.0", "Memory database", 1000000);
+
+    db.transaction(function (tx) {
+        // Create tables if they do not exist
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Words (id TEXT, player TEXT, message TEXT, PRIMARY KEY (id, player))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT, downvote INTEGER, UNIQUE(word, player))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Votes (word TEXT, player TEXT, UNIQUE(word, player))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Abandon (word TEXT, UNIQUE(word))');
+
+        zeropointwords = "";
+
+        var _players = ""; // Adding only the players who are in Words table
+        pointsModel.clear(); // First clear pointsModel
+
+        var rs = tx.executeSql('SELECT * FROM Words');
+        for (var i = 0; i < rs.rows.length; i++) {
+            pointsModel.append({player: rs.rows.item(i).player, points: 0});
+
+            var __msg = rs.rows.item(i).message.split(",");
+            for (var j = 3; j < __msg.length; j++) {
+                tx.executeSql('INSERT OR IGNORE INTO Results (word, player, downvote) VALUES (?, ?, ?)', [__msg[j], __msg[1], 0]);
+            }
+        }
+
+        _players = playerlist.split(",");
+        var _pla_length = rs.rows.length; // Number of players
+        wordModel.clear();
+
+        // Combined query for points calculation and filtering valid words
+        /*var combinedQuery = tx.executeSql("SELECT word, GROUP_CONCAT(DISTINCT player, ' ') AS players, \
+            (? - COUNT(DISTINCT r.player)) AS player_points, SUM(CASE WHEN v.player IS NOT NULL THEN 1 ELSE 0 END) AS total_downvotes \
+            FROM Results r LEFT JOIN Votes v ON r.word = v.word GROUP BY word ORDER BY word ASC" , [_pla_length]);*/
+
+        var combinedQuery = tx.executeSql(
+                    "SELECT r.word AS word, " +
+                    "GROUP_CONCAT(DISTINCT r.player) AS players, " + // Removed second argument from GROUP_CONCAT
+                    "(? - COUNT(DISTINCT r.player)) AS player_points, " +
+                    "SUM(CASE WHEN v.player IS NOT NULL THEN 1 ELSE 0 END) AS total_downvotes " +
+                    "FROM Results r " +
+                    "LEFT JOIN Votes v ON r.word = v.word " +
+                    "GROUP BY r.word " +
+                    "ORDER BY r.word ASC",
+                    [_pla_length]
+                    );
+
+        for (var k = 0; k < combinedQuery.rows.length; k++) {
+            var word = combinedQuery.rows.item(k).word;
+            var players = combinedQuery.rows.item(k).players;
+            var playerPoints = combinedQuery.rows.item(k).player_points;
+            var totalDownvotes = combinedQuery.rows.item(k).total_downvotes;
+
+
+            // Check if the word is valid based on downvotes
+            if (players.split(",").length == _pla_length && _pla_length > 1) {
+                zeropointwords += (zeropointwords ? ", " : "") + word;
+            }
+            else if (totalDownvotes <= Math.floor(_pla_length / 2) && _pla_length < 2) {
+                // Append valid words to wordModel
+                wordModel.append({word: word, mypoints: playerPoints + 1, players: players});
+
+                // Update points for each player who contributed to this word
+                for (var m = 0; m < rs.rows.length; m++) {
+                    if (String(players).indexOf(rs.rows.item(m).player) !== -1) {
+                        pointsModel.set(m, {points: pointsModel.get(m).points + playerPoints + 1});
+                    }
+                }
+            }
+
+            else if (totalDownvotes <= Math.floor(_pla_length / 2)){
+
+                // Append valid words to wordModel
+                wordModel.append({word: word, mypoints: playerPoints, players: players});
+
+                // Update points for each player who contributed to this word
+                for (m = 0; m < rs.rows.length; m++) {
+                    if (String(players).indexOf(rs.rows.item(m).player) !== -1) {
+                        pointsModel.set(m, {points: pointsModel.get(m).points + playerPoints});
+                    }
+                }
+            }
+
+            else {
+                // Words with excessive downvotes can be logged or handled separately if needed
+                tx.executeSql('INSERT OR IGNORE INTO Abandon (word) VALUES (?)', [word]);
+                var abandonQuery = tx.executeSql('SELECT * FROM Abandon');
+                vastedwords = ""
+                for (m = 0; m < abandonQuery.rows.length; m++) {
+                    vastedwords += (vastedwords ? ", " : "") + abandonQuery.rows.item(m).word;
+                }
+
+
+            }
+        }
+    });
+}
+
+function fillResults_OLD () {
 
     var db = LocalStorage.openDatabaseSync("WordPuzzleDB", "1.0", "Memory database", 1000000);
 
     db.transaction(function (tx) {
         // Create the table if it does not exist
         tx.executeSql('CREATE TABLE IF NOT EXISTS Words (id TEXT, player TEXT, message TEXT, PRIMARY KEY (id, player))');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT, UNIQUE(word, player))');
-        tx.executeSql('DELETE FROM Results')
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT, downvote INTEGER, UNIQUE(word, player))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Votes (word TEXT, player TEXT, UNIQUE(word, player))');
+        //tx.executeSql('DELETE FROM Results')
+
+        zeropointwords = ""
 
         var _players = "" //adding only the players who are in Words table
         // First clear pointsModel
@@ -98,7 +215,7 @@ function fillResults () {
 
             var __msg = rs.rows.item(i).message.split(",")
             for (var j =3;j< __msg.length;j++){
-                tx.executeSql('INSERT INTO Results (word, player) VALUES (?, ?)', [__msg[j], __msg[1]]);
+                tx.executeSql('INSERT OR IGNORE INTO Results (word, player, downvote) VALUES (?, ?, ?)', [__msg[j], __msg[1], 0]);
             }
         }
         // Query to group by word, concatenate players, and count players
@@ -145,10 +262,32 @@ function fillResults () {
 
             }
         }
-
-        //wordModel.append({word: _zero_words, mypoints : 0, players: qsTr("All players")})
-        //zeropointwords = _zero_words
-
     });
 
+}
+
+
+function deleteWord(wrd, playr) {
+
+    var db = LocalStorage.openDatabaseSync("WordPuzzleDB", "1.0", "Memory database", 1000000);
+
+    db.transaction(function (tx) {
+        // Create the table if it does not exist
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Words (id TEXT, player TEXT, message TEXT, PRIMARY KEY (id, player))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT, downvote INTEGER, UNIQUE(word, player))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Votes (word TEXT, player TEXT, UNIQUE(word, player))');
+        tx.executeSql('INSERT OR IGNORE INTO Votes (word, player) VALUES (?, ?)', [wrd, playr]);
+        console.log(wrd,playr)
+        //var ry = tx.executeSql('SELECT sum(downvote) AS value FROM Results WHERE word = ?', [wrd])
+        //console.log("hmmmmmm", ry.rows.item(0).value, numberOfPlayers/2, wrd, playr)
+        /*if (ry.rows.item(0).value > numberOfPlayers/2 + 0.1){
+            tx.executeSql('DELETE FROM Results WHERE word = ?', wrd)
+            console.log("tuhotaan", wrd, playr)
+            //fillResults()
+            //wordModel.clear();
+
+        }*/
+
+
+    })
 }

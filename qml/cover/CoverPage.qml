@@ -11,12 +11,12 @@ CoverBackground {
     CoverActionList {
         id: coverAction
 
-        CoverAction {
+        /* CoverAction {
             iconSource: "image://theme/icon-cover-next"
         }
 
         CoverAction {
             iconSource: "image://theme/icon-cover-pause"
-        }
+        }*/
     }
 }

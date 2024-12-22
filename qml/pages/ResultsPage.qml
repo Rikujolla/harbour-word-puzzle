@@ -27,6 +27,8 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.LocalStorage 2.0
 import "analyze.js" as Myan
+import harbour.word.puzzle.sender 1.0
+import harbour.word.puzzle.receiver 1.0
 
 
 Page {
@@ -40,12 +42,12 @@ Page {
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: mainColumn.height
-        /*PullDownMenu {
+        PullDownMenu {
             MenuItem {
-                text: qsTr("Edit data")
-                onClicked: {}
+                text: qsTr("Refresh")
+                onClicked: {Myan.fillResults()}
             }
-        }*/
+        }
 
         Column {
             id: mainColumn
@@ -53,6 +55,13 @@ Page {
 
             PageHeader {
                 title: qsTr("Results")
+            }
+
+            UdpReceiver {
+                id:urecei
+                onRmoveChanged: {
+                    Myan.analyze(rmove)
+                }
             }
 
             SectionHeader { text: qsTr("Ranking list")}
@@ -78,7 +87,7 @@ Page {
                 text: qsTr("Words, points and players")
             }
 
-            ColumnView {
+            /*ColumnView {
                 id: firstColumn
                 model:wordModel
                 width: parent.width
@@ -89,27 +98,86 @@ Page {
                     label: word + "; " + mypoints + "; " + players
                     menu: ContextMenu {
                         id:listosMenu
-                        /*
+
                         MenuItem {
                             text: qsTr("Delete")
-                            onClicked: {dayValues_g.indexEdit=index;
+                            onClicked: {
+                                //dayValues_g.indexEdit=index;
                                 remorseDel.execute(qsTr("Deleting"), console.log("remorse") , 3000 )
                             }
                             RemorsePopup { id: remorseDel
                                 onTriggered: {
-                                    Mydbases.deleteRecord_n();
-                                    editDataUpdate.start();
+                                    usend.sipadd = player_id + "," + myPlayerName + ",DOWNVOTE," + word
+                                    usend.broadcastDatagram()
+                                    errortimer = 60000
+                                    //refreshing.start()
+                                    //Myan.deleteWord(word, myPlayerName);
                                 }
                             }
                         }
-                        */
+
                     }
 
+                }
+            }*/
+
+            ColumnView {
+                id: firstColumn
+                model:wordModel
+                width: parent.width
+                itemHeight: Theme.itemSizeSmall
+                delegate: Row {
+                    id: listos
+                    x: Theme.paddingLarge
+                    spacing: 0.1*page.width
+                    IconButton {
+                        id: ic
+                        icon.source: "image://theme/icon-m-cancel"
+                        onClicked: {
+                            remorseDel.execute(qsTr("Deleting"), console.log("remorse") , 2000 )
+                        }
+                        RemorsePopup { id: remorseDel
+                            width: page.width
+                            onTriggered: {
+                                usend.sipadd = player_id + "," + myPlayerName + ",DOWNVOTE," + word
+                                usend.broadcastDatagram()
+                                refreshing.start()
+                            }
+                        }
+                    }
+                    BackgroundItem {
+                        id: bg
+                        height:ic.height
+                        width: 0.9*page.width - ic.width -Theme.paddingLarge
+                        Text {
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.primaryColor
+                            anchors.verticalCenter: parent.verticalCenter
+                            //verticalAlignment: bg.verticalCenter
+                            text: word + "; " + mypoints + "; " + players
+                        }
+                    }
                 }
             }
 
             SectionHeader {
-                visible: numberOfPlayers > 1
+                visible: vastedwords != ""
+                text: qsTr("Abandoned words")
+            }
+
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: parent.width
+                visible:vastedwords != ""
+                text: vastedwords
+                x: Theme.paddingLarge
+                //anchors.centerIn: parent
+            }
+
+            SectionHeader {
+                visible: zeropointwords != ""
                 text: qsTr("Common words for all")}
 
             Text {
@@ -117,7 +185,7 @@ Page {
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: parent.width
-                visible:numberOfPlayers > 1
+                visible:zeropointwords != ""
                 text: zeropointwords
                 x: Theme.paddingLarge
                 //anchors.centerIn: parent
@@ -126,6 +194,21 @@ Page {
         }
 
     }
+
+    Timer { //not working, have to do manually
+        id:refreshing
+        interval: 5300
+        running: false
+        //running: errortimer > 0 && Qt.ApplicationActive
+        repeat: true
+        onTriggered: {
+            errortimer = errortimer - interval
+            errortimer < interval ? refreshing.stop:""
+            Myan.fillResults()
+        }
+
+    }
+
     Component.onCompleted:{
         Myan.fillResults()
     }

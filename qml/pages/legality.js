@@ -31,7 +31,7 @@ function addWord (_word) {
 
     db.transaction(function (tx) {
         // Create the table if it does not exist
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT, downvote INTEGER, UNIQUE(word, player))');
         var rs = tx.executeSql('SELECT * FROM Results WHERE word = ? AND player = ?',[_word, myPlayerName]);
         // Add word if not duplicate
         if (rs.rows.length == 0 && _word != "" && _word.length>2){
