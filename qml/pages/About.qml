@@ -51,6 +51,7 @@ Page {
             PageHeader {
                 title: qsTr("About page")
             }
+
             Image {
                 id: logo
                 source: "./images/harbour-word-puzzle.png"
@@ -69,7 +70,7 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 //: The name of the app followed with a version number
-                text: {qsTr("Word puzzle, version") + " 0.1.1"}
+                text: {qsTr("Word puzzle, version") + " 0.1.2"}
             }
 
             SectionHeader { text: qsTr("Idea") }
@@ -84,7 +85,7 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 text: {qsTr("The idea of the game is to make words by selecting letters.") + " "
-                    + qsTr("The game is at it's best when having multiple players on the same LAN network.")
+                       + qsTr("The game is at it's best when having multiple players on the same LAN network.")
                 }
             }
 

@@ -70,18 +70,9 @@ ApplicationWindow {
         id:usend
     }
 
-    /*UdpReceiver {
-        id:urecei
-        onRmoveChanged: {
-            Myan.analyze(rmove)
-        }
-    }*/
-
-
     Component.onCompleted: {
         Myfreq.findLetters("finnish")
         Mysets.clearTables()
         Mysets.loadSettings()
-
     }
 }

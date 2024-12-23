@@ -1,4 +1,4 @@
-/*Copyright (c) 2018, Riku Lahtinen
+/*Copyright (c) 2024, Riku Lahtinen
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,6 @@ import QtQuick.LocalStorage 2.0
 import "analyze.js" as Myan
 import harbour.word.puzzle.sender 1.0
 import harbour.word.puzzle.receiver 1.0
-
 
 Page {
     id:page
@@ -87,40 +86,6 @@ Page {
                 text: qsTr("Words, points and players")
             }
 
-            /*ColumnView {
-                id: firstColumn
-                model:wordModel
-                width: parent.width
-                itemHeight: Theme.itemSizeSmall
-                delegate: ComboBox {
-                    id: listos
-                    x: Theme.paddingLarge
-                    label: word + "; " + mypoints + "; " + players
-                    menu: ContextMenu {
-                        id:listosMenu
-
-                        MenuItem {
-                            text: qsTr("Delete")
-                            onClicked: {
-                                //dayValues_g.indexEdit=index;
-                                remorseDel.execute(qsTr("Deleting"), console.log("remorse") , 3000 )
-                            }
-                            RemorsePopup { id: remorseDel
-                                onTriggered: {
-                                    usend.sipadd = player_id + "," + myPlayerName + ",DOWNVOTE," + word
-                                    usend.broadcastDatagram()
-                                    errortimer = 60000
-                                    //refreshing.start()
-                                    //Myan.deleteWord(word, myPlayerName);
-                                }
-                            }
-                        }
-
-                    }
-
-                }
-            }*/
-
             ColumnView {
                 id: firstColumn
                 model:wordModel
@@ -173,7 +138,6 @@ Page {
                 visible:vastedwords != ""
                 text: vastedwords
                 x: Theme.paddingLarge
-                //anchors.centerIn: parent
             }
 
             SectionHeader {
@@ -188,29 +152,20 @@ Page {
                 visible:zeropointwords != ""
                 text: zeropointwords
                 x: Theme.paddingLarge
-                //anchors.centerIn: parent
             }
-
         }
-
     }
 
     Timer { //not working, have to do manually
         id:refreshing
         interval: 500
         running: false
-        //running: errortimer > 0 && Qt.ApplicationActive
         repeat: false
         onTriggered: {
-            //errortimer = errortimer - interval
-            //errortimer < interval ? refreshing.stop():""
-            //Myan.fillResults()
             usend.sipadd = player_id + "," + myPlayerName + ",REFRESH"
             usend.broadcastDatagram()
             refreshing.stop()
-
         }
-
     }
 
     Component.onCompleted:{

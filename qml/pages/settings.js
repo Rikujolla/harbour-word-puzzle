@@ -17,10 +17,7 @@ function clearTables () {
                     vastedwords = ""
                 }
                 )
-
 }
-
-
 
 function saveSettings() {
 
@@ -49,7 +46,6 @@ function saveSettings() {
 
                 }
                 )
-
 }
 
 function loadSettings() {
@@ -73,10 +69,6 @@ function loadSettings() {
                     rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', ['playMode']);
                     if (rs.rows.length > 0) {playMode = rs.rows.item(0).valte}
                     else {}
-
-
                 }
-
                 )
-
 }

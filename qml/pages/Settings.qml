@@ -1,4 +1,4 @@
-/*Copyright (c) 2015-2019, Riku Lahtinen
+/*Copyright (c) 2024, Riku Lahtinen
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -32,7 +32,7 @@ import "./settings.js" as Mysets
 
 Page {
     id: page
-    //onStatusChanged: game.text = openingGame
+
     SilicaFlickable {
         anchors.fill: parent
 
@@ -106,96 +106,7 @@ Page {
                 }
             }
 
-
             SectionHeader { text: qsTr("Player settings")}
-
-            /*ComboBox {
-                id: setOpponent
-                width: parent.width
-                //contentHeight: Theme.paddingMedium
-                label: qsTr("Opponent")
-                currentIndex: playMode == "othDevice" ? 2 : (playMode == "human" ? 1 : 0)
-
-                menu: ContextMenu {
-                    MenuItem {
-                        //: Stockfish is a name of the chess engine, more info https://stockfishchess.org/
-                        text: qsTr("Only me")
-                        onClicked: {
-                            playMode = "only_me"
-                            setOpponent.currentIndex = 0
-                            console.log("Play mode: " + playMode)
-                        }
-                    }
-                    MenuItem {
-                        text: qsTr("Human")
-                        onClicked: {
-                            playMode = "human"
-                            setOpponent.currentIndex = 1
-                            console.log("Play mode: " + playMode)
-                        }
-                    }
-                    MenuItem {
-                        text: qsTr("Local network")
-                        onClicked: {
-                            playMode = "othDevice"
-                            setOpponent.currentIndex = 2
-                            //pageStack.push(Qt.resolvedUrl("Chat3.qml"));
-                            console.log("Play mode: " + playMode)
-                        }
-                    }
-                }
-            }
-
-            Row {
-                x: Theme.paddingLarge
-                spacing: Theme.paddingMedium
-                anchors.left: parent.left
-                visible: setOpponent.currentIndex == 2
-                ComboBox { // for dynamic creation see Pastie: http://pastie.org/9813891
-                    id: portSettings
-                    //width: page.width*2/3
-                    width: currentIndex == 0 ? page.width : page.width*2/3
-                    label: qsTr("Port number")
-                    currentIndex: portFixed
-                    menu: ContextMenu {
-                        MenuItem {
-                            text: qsTr("Random")
-                            onClicked: {
-                                portSettings.currentIndex = 0;
-                                //myPort = 0;
-                                //console.log(myPort);
-                            }
-                        }
-                        MenuItem {
-                            text: qsTr("Fixed")
-                            onClicked: {
-                                portSettings.currentIndex = 1;
-                                //myPort = portValue.text;
-                            }
-                        }
-                    }
-                }
-
-                TextField {
-                    id: portValue
-                    text: "myPort"
-                    placeholderText: "12345"
-                    //label: qsTr("ECO code")
-                    visible: portSettings.currentIndex == 1
-                    width: page.width/4
-                    color: errorHighlight? "red" : Theme.primaryColor
-                    inputMethodHints:  Qt.ImhDigitsOnly
-                    EnterKey.enabled: !errorHighlight
-                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                    EnterKey.onClicked: {
-                        focus = false
-                        myPort = text;
-                        //console.log(myPort);
-
-                    }
-                }
-            }*/
-
 
             Row {
                 x: Theme.paddingLarge
@@ -215,10 +126,6 @@ Page {
                     placeholderText: "Hopo"
                     text:myPlayerName
                     width: page.width/2
-                    //validator: RegExpValidator { regExp: /^\d*\.?\d*$/ }
-                    //color: errorHighlight? "red" : Theme.primaryColor
-                    //inputMethodHints: Qt.ImhDigitsOnly
-                    //EnterKey.enabled: !errorHighlight
                     EnterKey.iconSource: "image://theme/icon-m-enter-close"
                     EnterKey.onClicked: {
                         focus = false
@@ -256,46 +163,10 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         player_id = playerIdBox.text
-                        //usend.sipadd = myPlayerName
-                        //console.log(myPlayerName, usend.sipadd);
                         Mysets.saveSettings()
-
                     }
                 }
             }
-
-            /*Row {
-                x: Theme.paddingLarge
-                spacing: Theme.paddingMedium
-                visible: playMode == "othDevice"
-                Text {
-                    text: qsTr("Number of players")
-                    color: Theme.secondaryHighlightColor
-                    x: Theme.paddingLarge
-                    font.pixelSize: Theme.fontSizeSmall
-                    width:page.width/2
-                    wrapMode: Text.WordWrap
-                }
-
-                TextField {
-                    id: numberPlayers
-                    placeholderText: "mount"
-                    text:numberOfPlayers
-                    width: page.width/2
-                    validator: RegExpValidator { regExp: /^\d*\.?\d*$/ }
-                    color: errorHighlight? "red" : Theme.primaryColor
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    EnterKey.enabled: !errorHighlight
-                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                    EnterKey.onClicked: {
-                        focus = false
-                        numberOfPlayers = numberPlayers.text
-                    }
-                }
-            }*/
-
-
-
 
             VerticalScrollDecorator {}
 

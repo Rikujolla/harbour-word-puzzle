@@ -1,10 +1,10 @@
 Name:       harbour-word-puzzle
 
 Summary:    Word puzzle application
-Version:    0.1.1
+Version:    0.1.2
 Release:    1
-License:    LICENSE
-URL:        http://rikujolla.fi/
+License:    BSD
+URL:        https://github.com/Rikujolla/harbour-word-puzzle
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
@@ -14,7 +14,7 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
 
 %description
-The idea of the game is to make words by selecting letters. The game is at its best when having multiple devices on same LAN.
+The idea of the game is to make words by selecting letters. The game is at its best when having multiple devices on the same LAN.
 
 
 %prep

@@ -93,15 +93,14 @@ Page {
             /*UdpSender {
                 id:usend
             }*/
+
             UdpReceiver {
                 id:urecei
                 onRmoveChanged: {
                     Myan.analyze(rmove)
                 }
             }
-            //BackgroundItem {
-            //width: page.width
-            //height:400
+
             ProgressBar {
                 id:progress
                 width: page.width
@@ -147,14 +146,10 @@ Page {
                                 ctx.fillStyle = Qt.rgba(1, 1, 0, 1);
                                 ctx.strokeStyle = "blue";
                                 ctx.lineWidth = "4";
-                                //ctx.fillRect(0, 0, width, height);
                                 ctx.rect(0, 0, width, height);
-                                //ctx.stroke();
-                                ctx.fillStyle = "#ff0000";
+                                ctx.fillStyle = "blue"; // Set text color to blue
                                 ctx.font='150px Sail Sans Pro';
-                                //ctx.font = '30px Sail Sans Pro';
                                 ctx.textAlign = "center";
-                                //ctx.rotation = rotation_rad
                                 ctx.rotate(rotation_rad)
                                 if (rotation_rad == 0) {ctx.fillText(letter, width/2, height-60);}
                                 else if (rotation_rad == 1.571) {ctx.fillText(letter, width/2, -height/2+60);}
@@ -170,7 +165,6 @@ Page {
                                 onClicked: {
                                     currentWord = currentWord + letterModel.get(index).letter
                                     midfield.text = currentWord
-                                    //if (debug) {console.log(currentWord)}
                                     possible = 0
                                     Mylegal.hideImpossible(index)
                                 }
@@ -208,7 +202,6 @@ Page {
                     horizontalAlignment: TextEdit.AlignHCenter
                     enabled: false
                     text: currentWord
-
                 }
 
                 IconButton{
@@ -216,10 +209,7 @@ Page {
                     icon.source: "image://theme/icon-m-forward"
                     enabled: progress.value > 0
                     onClicked: {
-                        //if (debug) {console.log(currentWord)}
                         Mylegal.addWord(currentWord)
-                        //if (words == "") {words = words + currentWord}
-                        //else {words = words + ", " + currentWord}
                         currentWord = ""
                         midfield.text = currentWord
                         for (var i = 0; i<16; i++ ) {
@@ -227,13 +217,9 @@ Page {
                             letterModel.set(i,{"temp_possible":1})
                         }
                         if (player_id > 1) {
-                            //usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words.replace(", ", ",")
                             usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
                             usend.broadcastDatagram()}
                         else {
-                            //usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
-                            //usend.broadcastDatagram()
-                            //usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words.replace(", ", ",")
                             usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
                             usend.broadcastDatagram()
                         }
