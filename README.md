@@ -11,7 +11,7 @@ There will be main branch which is a code for the releases in Jolla Harbour, Chu
 4. Remove extra console.logs from the code
 5. Finalize harbour-word-puzzle.changes file
 6. Test the app
-7. Do Jolla Harbour tests for the rpms
+7. Do Jolla Harbour tests for the rpms (https://forum.sailfishos.org/t/missing-harbour-validator/2583/3)
 8. Commit changes for the version, amend commits if changes are needed in the test process
 9. Merge dev branch to the master
 10. Move the source to GitHub

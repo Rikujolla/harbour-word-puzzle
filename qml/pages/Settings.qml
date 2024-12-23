@@ -131,7 +131,6 @@ Page {
                         focus = false
                         myPlayerName = player.text
                         usend.sipadd = myPlayerName
-                        console.log(myPlayerName, usend.sipadd);
                         Mysets.saveSettings()
                     }
                 }

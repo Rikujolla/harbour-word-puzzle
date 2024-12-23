@@ -115,7 +115,6 @@ Page {
                     onTriggered: {
                         //time_current = time_current + progress_timer.interval
                         progress.value = progress.value - interval/1000
-                        //console.log("test")
                     }
                 }
             }

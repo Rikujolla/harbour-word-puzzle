@@ -8,7 +8,7 @@ function analyze(_move) {
 
     if (message[2] == "PLAYERS") {
         if (message[1] == ""){
-            console.log("Some player has no name")
+            if (debug) {console.log("Some player has no name")}
         }
         if (playerlist == "") {
             playerlist = playerlist + message[1]
@@ -27,7 +27,7 @@ function analyze(_move) {
     //if (message[2] == "SET" && player_id > 1 ) {
     if (message[2] == "SET") {
 
-        console.log("analyze_SET", _letterlist[2], letterlist)
+        if (debug) {console.log("analyze_SET", _letterlist[2], letterlist)}
         letterModel.clear();
         for (i=3;i<_letterlist.length-1;i++){
             if ((i-3)%2==0){
@@ -56,17 +56,17 @@ function analyze(_move) {
     }
 
     if (message[2] == "WORDS") {
-        console.log("Words", message[2], message)
+        if (debug) {console.log("Words", message[2], message)}
         saveWords(_move)
     }
 
     if (message[2] == "DOWNVOTE") {
-        console.log("Downvote", message[2], message)
+         if (debug) {console.log("Downvote", message[2], message)}
         deleteWord(message[3], message[1])
     }
 
     if (message[2] == "REFRESH") {
-        console.log("Refresh", message[2], message)
+         if (debug) {console.log("Refresh", message[2], message)}
         fillResults()
     }
 }
@@ -84,11 +84,11 @@ function saveWords(msg) {
         // Check if the row already exists
         var rs = tx.executeSql('SELECT * FROM Words WHERE id = ? AND player = ?', [_msg[0], _msg[1]]);
         if (rs.rows.length > 0) {
-            console.log("Updating existing row...");
+             if (debug) {console.log("Updating existing row...")};
             // Update the message if the row exists
             tx.executeSql('UPDATE Words SET message = ? WHERE id = ? AND player = ?', [msg, _msg[0], _msg[1]]);
         } else {
-            console.log("Inserting new row...");
+             if (debug) {console.log("Inserting new row...")};
             // Insert a new row if it doesn't exist
             tx.executeSql('INSERT INTO Words (id, player, message) VALUES (?, ?, ?)', [_msg[0], _msg[1], msg]);
         }
@@ -198,6 +198,6 @@ function deleteWord(wrd, playr) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT, downvote INTEGER, UNIQUE(word, player))');
         tx.executeSql('CREATE TABLE IF NOT EXISTS Votes (word TEXT, player TEXT, UNIQUE(word, player))');
         tx.executeSql('INSERT OR IGNORE INTO Votes (word, player) VALUES (?, ?)', [wrd, playr]);
-        console.log(wrd,playr)
+         if (debug) {console.log(wrd,playr)}
     })
 }

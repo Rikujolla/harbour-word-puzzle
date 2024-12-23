@@ -1,25 +1,36 @@
 function findLetters(lang) {
 
     // Finnish frequency from the page https://fi.wikipedia.org/wiki/Suomen_kieli
-    // Swedish frequency from the page https://sv.wikipedia.org/wiki/Sverige
     var finnish = [
-                {letter:"A",less:89},
-                {letter:"D",less:112},
-                {letter:"E",less:200},
-                {letter:"H",less:222},
-                {letter:"I",less:368},
-                {letter:"K",less:426},
-                {letter:"L",less:468},
-                {letter:"M",less:492},
-                {letter:"N",less:556},
-                {letter:"O",less:612},
-                {letter:"P",less:647},
-                {letter:"R",less:680},
-                {letter:"S",less:751},
-                {letter:"T",less:840},
-                {letter:"U",less:876}
+                {letter:"A",less:114}, //89->114
+                {letter:"B",less:116}, //96->116
+                {letter:"C",less:118}, //108->118
+                {letter:"D",less:130},
+                {letter:"E",less:262}, //218->262
+                {letter:"F",less:264}, //234->264
+                {letter:"G",less:266}, //246->266
+                {letter:"H",less:268},
+                {letter:"I",less:414},
+                {letter:"J",less:426},
+                {letter:"K",less:484},
+                {letter:"L",less:526},
+                {letter:"M",less:550},
+                {letter:"N",less:614},
+                {letter:"O",less:670},
+                {letter:"P",less:705},
+                {letter:"R",less:739},
+                {letter:"S",less:809},
+                {letter:"T",less:898},
+                {letter:"U",less:934},
+                {letter:"V",less:960}, //951->960
+                {letter:"W",less:979}, //969->979
+                {letter:"X",less:980}, //971->980
+                {letter:"Y",less:981},
+                {letter:"Ä",less:997},
+                {letter:"Ö",less:999}
             ];
 
+    // Swedish frequency from the page https://sv.wikipedia.org/wiki/Sverige
     var swedish = [
                 {letter:"A",less:76},
                 {letter:"D",less:118},
@@ -40,28 +51,25 @@ function findLetters(lang) {
                 {letter:"W",less:914}
             ];
 
-    console.log(finnish.length, finnish[finnish.length-1].less +1)
     // Setting letters
     letterlist = ""
     letterModel.clear();
     for (var i = 0;i < 16; i++) {
-        //var rand = Math.random() * (finnish[finnish.length-1].less +1);
-        var rand = Math.random() * (876);
-        //console.log(rand)
+        var rand = Math.random() * (finnish[finnish.length-1].less);
+        var _letter = ""
+        var _notfound = true
         for (var j = 0;j<finnish.length-1;j++) {
-            if (finnish[j+1].less > rand) {
-                letterModel.set(i,{"letter":finnish[j].letter})
-                break;
+            if (j == 0 && rand < finnish[j].less && _notfound) {
+                _letter = finnish[j].letter
+                _notfound = false
+            }
+            else if (j > 0 && rand > finnish[j-1].less && rand < finnish[j].less && _notfound) {
+                _letter = finnish[j].letter
+                _notfound = false
             }
         }
-
-        //For some reason the upper doesnt always work, so lets solve it some way
-        /*if (j == finnish.length-1){
-            letterModel.set(i,{"letter":finnish[0].letter})
-        }
-        if (typeof letterModel.get(i).letter == 'undefined'){
-            letterModel.set(i,{"letter":finnish[0].letter})
-        }*/
+        if (_notfound){_letter = finnish[finnish.length-1].letter}
+        letterModel.set(i,{"letter":_letter})
 
         letterModel.set(i,{"possible":0})
         letterModel.set(i,{"temp_possible":1})
