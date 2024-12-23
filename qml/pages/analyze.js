@@ -68,6 +68,13 @@ function analyze(_move) {
         deleteWord(message[3], message[1])
     }
 
+    if (message[2] == "REFRESH") {
+
+        console.log("Refresh", message[2], message)
+        fillResults()
+    }
+
+
 }
 
 function saveWords(msg) {

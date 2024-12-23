@@ -64,7 +64,6 @@
     <name>PuzzlePage</name>
     <message>
         <source>About</source>
-<<<<<<< HEAD
         <translation>Tietoja</translation>
     </message>
     <message>
@@ -86,68 +85,45 @@
     <message>
         <source>Words</source>
         <translation>Sanat</translation>
-=======
-        <translation type="unfinished">Tietoja</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Results</source>
-        <translation type="unfinished">Tulokset</translation>
-    </message>
-    <message>
-        <source>Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Word puzzle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Words</source>
-        <translation type="unfinished"></translation>
->>>>>>> 60a138b264658855912b8e1f1bbca93613ba17ad
     </message>
     <message>
         <source>Players</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelaajat</translation>
     </message>
 </context>
 <context>
     <name>ResultsPage</name>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Päivitä</translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished">Tulokset</translation>
+        <translation>Tulokset</translation>
     </message>
     <message>
         <source>Ranking list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tulosluettelo</translation>
     </message>
     <message>
         <source>points</source>
-        <translation type="unfinished"></translation>
+        <translation>pistettä</translation>
     </message>
     <message>
         <source>Words, points and players</source>
-        <translation type="unfinished"></translation>
+        <translation>Sanat, pisteet ja pelaajat</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaan</translation>
     </message>
     <message>
         <source>Abandoned words</source>
-        <translation type="unfinished"></translation>
+        <translation>Hylätyt sanat</translation>
     </message>
     <message>
         <source>Common words for all</source>
-        <translation type="unfinished"></translation>
+        <translation>Yhteiset sanat kaikille</translation>
     </message>
 </context>
 <context>

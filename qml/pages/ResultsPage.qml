@@ -197,14 +197,18 @@ Page {
 
     Timer { //not working, have to do manually
         id:refreshing
-        interval: 5300
+        interval: 500
         running: false
         //running: errortimer > 0 && Qt.ApplicationActive
-        repeat: true
+        repeat: false
         onTriggered: {
-            errortimer = errortimer - interval
-            errortimer < interval ? refreshing.stop:""
-            Myan.fillResults()
+            //errortimer = errortimer - interval
+            //errortimer < interval ? refreshing.stop():""
+            //Myan.fillResults()
+            usend.sipadd = player_id + "," + myPlayerName + ",REFRESH"
+            usend.broadcastDatagram()
+            refreshing.stop()
+
         }
 
     }

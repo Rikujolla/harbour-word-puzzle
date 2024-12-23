@@ -1,7 +1,7 @@
 Name:       harbour-word-puzzle
 
 Summary:    Word puzzle application
-Version:    0.1.0
+Version:    0.1.1
 Release:    1
 License:    LICENSE
 URL:        http://rikujolla.fi/

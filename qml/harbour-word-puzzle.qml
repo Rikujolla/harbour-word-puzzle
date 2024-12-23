@@ -38,9 +38,6 @@ ApplicationWindow {
     property string myWords:"" //For display to enable wordWrap
     property bool p_timer:false //
     property int errortimer: 60000 // To stop error timer
-    property string myWords:"" //For display to enable wordWrap
-
-
 
     ListModel {
         id: letterModel
