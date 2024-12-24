@@ -147,13 +147,14 @@ Page {
                                 ctx.lineWidth = "4";
                                 ctx.rect(0, 0, width, height);
                                 ctx.fillStyle = "blue"; // Set text color to blue
-                                ctx.font='150px Sail Sans Pro';
+                                //console.log(Theme.fontSizeExtraLarge, Theme.fontSizeHuge, Theme.fontSizeLarge, Theme.fontSizeMedium, Theme.fontSizeSmall)
+                                ctx.font= Theme.fontSizeHuge + 'px ' + Theme.fontFamily;
                                 ctx.textAlign = "center";
                                 ctx.rotate(rotation_rad)
-                                if (rotation_rad == 0) {ctx.fillText(letter, width/2, height-60);}
-                                else if (rotation_rad == 1.571) {ctx.fillText(letter, width/2, -height/2+60);}
-                                else if (rotation_rad == 3.142) {ctx.fillText(letter, -width/2, -height/2+60);}
-                                else if (rotation_rad == 4.712) {ctx.fillText(letter, -width/2, height/2+60);}
+                                if (rotation_rad == 0) {ctx.fillText(letter, width/2, height/2+Theme.fontSizeSmall);}
+                                else if (rotation_rad == 1.571) {ctx.fillText(letter, width/2, -height/2+Theme.fontSizeSmall);}
+                                else if (rotation_rad == 3.142) {ctx.fillText(letter, -width/2, -height/2+Theme.fontSizeSmall);}
+                                else if (rotation_rad == 4.712) {ctx.fillText(letter, -width/2, height/2+Theme.fontSizeSmall);}
                                 ctx.restore();
                             }
                             MouseArea {

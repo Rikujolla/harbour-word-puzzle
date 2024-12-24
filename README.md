@@ -15,7 +15,7 @@ There will be main branch which is a code for the releases in Jolla Harbour, Chu
 8. Commit changes for the version, amend commits if changes are needed in the test process
 9. Merge dev branch to the master
 10. Move the source to GitHub
-11. Create package from GitHub main to the Mer OBS (tar -czvf harbour-word-puzzle-0.1.2.tar.bz2 harbour-word-puzzle-0.1.2)
+11. Create package from GitHub main to the Mer OBS (tar -czvf harbour-word-puzzle-0.1.4.tar.bz2 harbour-word-puzzle-0.1.4)
 12. Load the local rpms to Jolla Harbour and edit release info
 13. Load the local rpms to OpenRepos and edit release info
 
