@@ -90,6 +90,10 @@
         <source>Players</source>
         <translation>Pelaajat</translation>
     </message>
+    <message>
+        <source>player</source>
+        <translation>pelaaja</translation>
+    </message>
 </context>
 <context>
     <name>ResultsPage</name>

@@ -36,7 +36,9 @@ Page {
             MenuItem {
                 text: qsTr("Results")
                 onClicked: {
-                    zeropointwords = ""
+                    usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
+                    usend.broadcastDatagram()
+                    zeropointwords = "" //REMOVE??
                     pageStack.animatorPush(Qt.resolvedUrl("ResultsPage.qml"))
                 }
             }
@@ -227,7 +229,7 @@ Page {
                 }
             }
 
-            SectionHeader { text: qsTr("Words") }
+            SectionHeader { text:{qsTr("Words") + ", " + qsTr("player") + ": " + myPlayerName} }
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor

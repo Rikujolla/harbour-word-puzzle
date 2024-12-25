@@ -106,6 +106,7 @@ Page {
                             onTriggered: {
                                 usend.sipadd = player_id + "," + myPlayerName + ",DOWNVOTE," + word
                                 usend.broadcastDatagram()
+                                word_text.color = Theme.errorColor
                                 refreshing.start()
                             }
                         }
@@ -115,6 +116,7 @@ Page {
                         height:ic.height
                         width: 0.9*page.width - ic.width -Theme.paddingLarge
                         Text {
+                            id:word_text
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.primaryColor
                             anchors.verticalCenter: parent.verticalCenter

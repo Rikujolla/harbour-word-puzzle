@@ -11,11 +11,16 @@ There will be main branch which is a code for the releases in Jolla Harbour, Chu
 4. Remove extra console.logs from the code
 5. Finalize harbour-word-puzzle.changes file
 6. Test the app
-7. Do Jolla Harbour tests for the rpms (https://forum.sailfishos.org/t/missing-harbour-validator/2583/3)
+7. Do Jolla Harbour tests for the rpms (https://forum.sailfishos.org/t/missing-harbour-validator/2583/3):
+    alias sfdk=~/SailfishOS/bin/sfdk
+    sfdk config target=SailfishOS-4.6.0.13-aarch64
+    sfdk check harbour-word-puzzle-0.1.5-1.aarch64.rpm
 8. Commit changes for the version, amend commits if changes are needed in the test process
-9. Merge dev branch to the master
+9. Merge dev branch to the main, "git checkout main", "git merge dev015"
 10. Move the source to GitHub
-11. Create package from GitHub main to the Mer OBS (tar -czvf harbour-word-puzzle-0.1.4.tar.bz2 harbour-word-puzzle-0.1.4)
-12. Load the local rpms to Jolla Harbour and edit release info
-13. Load the local rpms to OpenRepos and edit release info
+11. Download zip from https://github.com/Rikujolla/harbour-word-puzzle/archive/refs/heads/main.zip
+12. Extract the zip file and rename the folder harbour-word-puzzle-0.1.5
+13. Create package from GitHub main to the Mer OBS (tar -czvf harbour-word-puzzle-0.1.5.tar.bz2 harbour-word-puzzle-0.1.5)
+14. Load the local rpms to Jolla Harbour and edit release info
+15. Load the local rpms to OpenRepos and edit release info
 

@@ -6,9 +6,9 @@ function findLetters(lang) {
                 {letter:"B",less:116}, //96->116
                 {letter:"C",less:118}, //108->118
                 {letter:"D",less:130},
-                {letter:"E",less:262}, //218->262
-                {letter:"F",less:264}, //234->264
-                {letter:"G",less:266}, //246->266
+                {letter:"E",less:256}, //218->256
+                {letter:"F",less:260}, //234->260
+                {letter:"G",less:264}, //246->264
                 {letter:"H",less:268},
                 {letter:"I",less:414},
                 {letter:"J",less:426},
@@ -22,7 +22,7 @@ function findLetters(lang) {
                 {letter:"S",less:809},
                 {letter:"T",less:898},
                 {letter:"U",less:934},
-                {letter:"V",less:960}, //951->960
+                {letter:"V",less:958}, //951->958
                 {letter:"W",less:979}, //969->979
                 {letter:"X",less:980}, //971->980
                 {letter:"Y",less:981},
