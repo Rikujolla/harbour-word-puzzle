@@ -111,7 +111,7 @@ Page {
             Row {
                 x: Theme.paddingLarge
                 spacing: Theme.paddingMedium
-                visible: playMode == "othDevice"
+                visible: true
                 Text {
                     text: qsTr("Player name")
                     color: Theme.secondaryHighlightColor
@@ -123,9 +123,13 @@ Page {
 
                 TextField {
                     id: player
-                    placeholderText: "Hopo"
+                    //: Typical woman name in the country adding number to give a hint for the format
+                    placeholderText: qsTr("Sophia5")
                     text:myPlayerName
                     width: page.width/2
+                    validator: RegExpValidator { regExp: /^([A-Za-zÅÄÖåäö]+[0-9]*)|([A-Za-zÅÄÖåäö]*)$/ }
+                    color: (errorHighlight || text.length < 2) ? "red" : Theme.primaryColor
+                    EnterKey.enabled: !errorHighlight && text.length > 1
                     EnterKey.iconSource: "image://theme/icon-m-enter-close"
                     EnterKey.onClicked: {
                         focus = false
@@ -136,7 +140,7 @@ Page {
                 }
             }
 
-            Row {
+            /*Row {
                 x: Theme.paddingLarge
                 spacing: Theme.paddingMedium
                 visible: playMode == "othDevice"
@@ -162,6 +166,36 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         player_id = playerIdBox.text
+                        Mysets.saveSettings()
+                    }
+                }
+            }*/
+
+            SectionHeader { text: qsTr("Words language")}
+
+            ColumnView {
+                id: languageColumn
+                model:languageModel
+                width: parent.width
+                itemHeight: Theme.itemSizeSmall
+
+                delegate: BackgroundItem {
+                    width: parent.width
+                    Label {
+                        text: language
+                        x: Theme.paddingLarge
+                        color: colorsel == "sel" ? Theme.primaryColor : Theme.secondaryColor
+                    }
+                    onClicked: {
+                        for (var i = 0;i < languages.length;i++){
+                            if(i == index){
+                                languageModel.set(i,{colorsel:"sel"})
+                                selectedLanguage = languages[index].lng
+                            }
+                            else {
+                                languageModel.set(i,{colorsel:"notsel"})
+                            }
+                        }
                         Mysets.saveSettings()
                     }
                 }

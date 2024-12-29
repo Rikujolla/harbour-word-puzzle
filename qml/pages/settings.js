@@ -38,12 +38,11 @@ function saveSettings() {
                     if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [player_id, 'player_id'])}
                     // If no players add active player
                     else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'player_id', '', '', '', player_id ])}
-                    // playMode
-                    rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'playMode');
-                    if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valte=? WHERE name=?', [playMode, 'playMode'])}
+                    // selectedLanguage
+                    rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'selectedLanguage');
+                    if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valte=? WHERE name=?', [selectedLanguage, 'selectedLanguage'])}
                     // If no players add active player
-                    else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'playMode', '', playMode, '', '' ])}
-
+                    else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'selectedLanguage', '', selectedLanguage, '', '' ])}
                 }
                 )
 }
@@ -65,10 +64,19 @@ function loadSettings() {
                     rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', ['player_id']);
                     if (rs.rows.length > 0) {player_id = rs.rows.item(0).valint}
                     else {}
-                    // playMode
-                    rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', ['playMode']);
-                    if (rs.rows.length > 0) {playMode = rs.rows.item(0).valte}
+                    // selectedLanguage
+                    rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', ['selectedLanguage']);
+                    if (rs.rows.length > 0) {selectedLanguage = rs.rows.item(0).valte}
                     else {}
                 }
                 )
+    languageModel.clear();
+    for (var i = 0; i < languages.length ;i++){
+        if(languages[i].lng == selectedLanguage){
+            languageModel.set(i,{"language":languages[i].lngtr, selected: true, colorsel:"sel"})
+        }
+        else {
+            languageModel.set(i,{"language":languages[i].lngtr, selected: false, colorsel:"notsel"})
+        }
+    }
 }

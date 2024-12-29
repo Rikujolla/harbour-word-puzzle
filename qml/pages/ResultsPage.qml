@@ -104,9 +104,12 @@ Page {
                         RemorsePopup { id: remorseDel
                             width: page.width
                             onTriggered: {
-                                usend.sipadd = player_id + "," + myPlayerName + ",DOWNVOTE," + word
-                                usend.broadcastDatagram()
-                                word_text.color = Theme.errorColor
+                                if(usend.cmove != "NO_CONNECTION") {
+                                    usend.sipadd = player_id + "," + myPlayerName + ",DOWNVOTE," + word
+                                    usend.broadcastDatagram()}
+                                else {
+                                    Myan.analyze(player_id + "," + myPlayerName + ",DOWNVOTE," + word)
+                                }
                                 refreshing.start()
                             }
                         }
@@ -118,7 +121,8 @@ Page {
                         Text {
                             id:word_text
                             font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.primaryColor
+                            font.italic: colorerr ? true : false
+                            color: colorerr ? Theme.errorColor : Theme.primaryColor
                             anchors.verticalCenter: parent.verticalCenter
                             //verticalAlignment: bg.verticalCenter
                             text: word + "; " + mypoints + "; " + players
@@ -164,8 +168,12 @@ Page {
         running: false
         repeat: false
         onTriggered: {
-            usend.sipadd = player_id + "," + myPlayerName + ",REFRESH"
-            usend.broadcastDatagram()
+            if(usend.cmove != "NO_CONNECTION") {
+                usend.sipadd = player_id + "," + myPlayerName + ",REFRESH"
+                usend.broadcastDatagram()}
+            else{
+                Myan.analyze(player_id + "," + myPlayerName + ",REFRESH")
+            }
             refreshing.stop()
         }
     }

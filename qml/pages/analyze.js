@@ -144,13 +144,16 @@ function fillResults() {
             var totalDownvotes = combinedQuery.rows.item(k).total_downvotes;
 
 
-            // Check if the word is valid based on downvotes
-            if (players.split(",").length == _pla_length && _pla_length > 1) {
+            if (word.length<3) {}
+            // If word belongs to all the players, add to zeropointslist
+            else if (players.split(",").length == _pla_length && _pla_length > 1) {
                 zeropointwords += (zeropointwords ? ", " : "") + word;
             }
+            // Check if the word is valid based on downvotes, sinle player mode
             else if (totalDownvotes <= Math.floor(_pla_length / 2) && _pla_length < 2) {
                 // Append valid words to wordModel
-                wordModel.append({word: word, mypoints: playerPoints + 1, players: players});
+                    wordModel.append({word: word, mypoints: playerPoints + 1, players: players});
+                //}
 
                 // Update points for each player who contributed to this word
                 for (var m = 0; m < rs.rows.length; m++) {
@@ -159,11 +162,16 @@ function fillResults() {
                     }
                 }
             }
-
-            else if (totalDownvotes <= Math.floor(_pla_length / 2)){
+            // Multiplayermode
+            else if (totalDownvotes < Math.floor(_pla_length / 2)){
 
                 // Append valid words to wordModel
-                wordModel.append({word: word, mypoints: playerPoints, players: players});
+                if (totalDownvotes > 0){
+                    wordModel.append({word: word, mypoints: playerPoints + 1, players: players, colorerr: true});
+                }
+                else {
+                    wordModel.append({word: word, mypoints: playerPoints + 1, players: players});
+                }
 
                 // Update points for each player who contributed to this word
                 for (m = 0; m < rs.rows.length; m++) {
@@ -181,8 +189,6 @@ function fillResults() {
                 for (m = 0; m < abandonQuery.rows.length; m++) {
                     vastedwords += (vastedwords ? ", " : "") + abandonQuery.rows.item(m).word;
                 }
-
-
             }
         }
     });

@@ -54,5 +54,6 @@ void Sender::broadcastDatagram() // sendMove
             //qDebug() << "Sent move:" << mySipadd << "to broadcast address:" << broadcastAddress.toString();
         } else {
             qDebug() << "Failed to determine broadcast address!";
+            myCmove = "NO_CONNECTION";
         }
 }

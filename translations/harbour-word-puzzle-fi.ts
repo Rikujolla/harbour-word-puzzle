@@ -163,16 +163,36 @@
         <translation>Pelaajan nimi</translation>
     </message>
     <message>
-        <source>Player ID</source>
-        <translation>Pelaajan ID</translation>
-    </message>
-    <message>
         <source>Game endurance</source>
         <translation>Pelin pituus</translation>
     </message>
     <message>
         <source>Player settings</source>
         <translation>Pelaaja-asetukset</translation>
+    </message>
+    <message>
+        <source>Sophia5</source>
+        <extracomment>Typical woman name in the country adding number to give a hint for the format</extracomment>
+        <translation>Sofia5</translation>
+    </message>
+    <message>
+        <source>Words language</source>
+        <translation>Sanojen kieli</translation>
+    </message>
+</context>
+<context>
+    <name>harbour-word-puzzle</name>
+    <message>
+        <source>English</source>
+        <translation>englanti</translation>
+    </message>
+    <message>
+        <source>Finnish</source>
+        <translation>suomi</translation>
+    </message>
+    <message>
+        <source>Swedish</source>
+        <translation>ruotsi</translation>
     </message>
 </context>
 </TS>

@@ -1,6 +1,9 @@
 function findLetters(lang) {
 
+    var _lang = []
+
     // Finnish frequency from the page https://fi.wikipedia.org/wiki/Suomen_kieli
+    // Modifications by Riku Lahtinen
     var finnish = [
                 {letter:"A",less:114}, //89->114
                 {letter:"B",less:116}, //96->116
@@ -29,46 +32,97 @@ function findLetters(lang) {
                 {letter:"Ä",less:997},
                 {letter:"Ö",less:999}
             ];
+    // English frequency from the page https://en.wikipedia.org/wiki/English_language
+    var english = [
+                {letter:"A",less:75},
+                {letter:"B",less:91},
+                {letter:"C",less:123},
+                {letter:"D",less:162},
+                {letter:"E",less:267},
+                {letter:"F",less:286},
+                {letter:"G",less:322},
+                {letter:"H",less:361},
+                {letter:"I",less:475},
+                {letter:"J",less:477},
+                {letter:"K",less:501},
+                {letter:"L",less:541},
+                {letter:"M",less:557},
+                {letter:"N",less:631},
+                {letter:"O",less:698},
+                {letter:"P",less:734},
+                {letter:"R",less:791},
+                {letter:"S",less:852},
+                {letter:"T",less:929},
+                {letter:"U",less:950},
+                {letter:"V",less:958},
+                {letter:"W",less:987},
+                {letter:"X",less:989},
+                {letter:"Y",less:998},
+                {letter:"Z",less:999}
+            ];
 
     // Swedish frequency from the page https://sv.wikipedia.org/wiki/Sverige
     var swedish = [
                 {letter:"A",less:76},
-                {letter:"D",less:118},
-                {letter:"E",less:208},
-                {letter:"G",less:244},
-                {letter:"H",less:269},
-                {letter:"I",less:378},
-                {letter:"K",less:424},
-                {letter:"L",less:459},
-                {letter:"M",less:481},
-                {letter:"N",less:539},
-                {letter:"O",less:586},
-                {letter:"P",less:625},
-                {letter:"R",less:697},
-                {letter:"S",less:772},
-                {letter:"T",less:854},
-                {letter:"V",less:883},
-                {letter:"W",less:914}
+                {letter:"B",less:89},
+                {letter:"C",less:107},
+                {letter:"D",less:149},
+                {letter:"E",less:240},
+                {letter:"F",less:254},
+                {letter:"G",less:289},
+                {letter:"H",less:314},
+                {letter:"I",less:423},
+                {letter:"J",less:427},
+                {letter:"K",less:473},
+                {letter:"L",less:508},
+                {letter:"M",less:530},
+                {letter:"N",less:588},
+                {letter:"O",less:635},
+                {letter:"P",less:674},
+                {letter:"R",less:746},
+                {letter:"S",less:821},
+                {letter:"T",less:903},
+                {letter:"U",less:917},
+                {letter:"V",less:945},
+                {letter:"W",less:977},
+                {letter:"X",less:978},
+                {letter:"Y",less:983},
+                {letter:"Å",less:987},
+                {letter:"Ä",less:994},
+                {letter:"Ö",less:999}
             ];
 
     // Setting letters
+    if (lang == "english"){
+    _lang = english
+    }
+    else if (lang == "finnish") {
+        _lang = finnish
+    }
+    else if (lang == "swedish") {
+        _lang = swedish
+    }
+    else {
+        _lang = finnish
+    }
+
     letterlist = ""
     letterModel.clear();
     for (var i = 0;i < 16; i++) {
-        var rand = Math.random() * (finnish[finnish.length-1].less);
+        var rand = Math.random() * (_lang[_lang.length-1].less);
         var _letter = ""
         var _notfound = true
-        for (var j = 0;j<finnish.length-1;j++) {
-            if (j == 0 && rand < finnish[j].less && _notfound) {
-                _letter = finnish[j].letter
+        for (var j = 0;j<_lang.length-1;j++) {
+            if (j == 0 && rand < _lang[j].less && _notfound) {
+                _letter = _lang[j].letter
                 _notfound = false
             }
-            else if (j > 0 && rand > finnish[j-1].less && rand < finnish[j].less && _notfound) {
-                _letter = finnish[j].letter
+            else if (j > 0 && rand > _lang[j-1].less && rand < _lang[j].less && _notfound) {
+                _letter = _lang[j].letter
                 _notfound = false
             }
         }
-        if (_notfound){_letter = finnish[finnish.length-1].letter}
+        if (_notfound){_letter = _lang[_lang.length-1].letter}
         letterModel.set(i,{"letter":_letter})
 
         letterModel.set(i,{"possible":0})

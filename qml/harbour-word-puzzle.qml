@@ -21,7 +21,7 @@ ApplicationWindow {
     property string piePat: "images/piece0/" // Piece sub path
     property string myPlayerName:""
     property int myPort: 45454
-    property string playMode: "othDevice"
+    property string selectedLanguage: "finnish"
     property string cardPositionString:""
     property string cardMoveString:""
     property int player_id:1 // Default id for playleader 1
@@ -38,6 +38,11 @@ ApplicationWindow {
     property string myWords:"" //For display to enable wordWrap
     property bool p_timer:false //
     property int errortimer: 60000 // To stop error timer
+    property var languages: [{lng:"english", lngtr:qsTr("English")},
+        {lng:"finnish", lngtr:qsTr("Finnish")},
+        {lng:"swedish", lngtr:qsTr("Swedish")}
+    ]
+
 
     ListModel {
         id: letterModel
@@ -55,6 +60,7 @@ ApplicationWindow {
             word: "ABC"
             mypoints : 1
             players: "P1, P2, P3"
+            colorerr: false
         }
     }
 
@@ -65,14 +71,32 @@ ApplicationWindow {
             points:0
         }
     }
+    ListModel {
+        id:languageModel
+        /*ListElement {
+            language:"english"
+            selected: false
+            colorsel:"notsel"
+        }*/
+        ListElement {
+            language:"finnish"
+            selected: true
+            colorsel:"sel"
+        }
+        /*ListElement {
+            language:"swedish"
+            selected: false
+            colorsel:"notsel"
+        }*/
+    }
 
     UdpSender {
         id:usend
     }
 
     Component.onCompleted: {
-        Myfreq.findLetters("finnish")
         Mysets.clearTables()
         Mysets.loadSettings()
+        Myfreq.findLetters(selectedLanguage)
     }
 }

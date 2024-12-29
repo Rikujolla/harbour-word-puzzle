@@ -10,7 +10,18 @@ import harbour.word.puzzle.receiver 1.0
 
 Page {
     id: page
+    onStatusChanged:{
+        if (letterModel.get(0).possible == 0 ){
+            letterModel.set(0,{"possible":1})
+            letterModel.set(0,{"possible":0})
+        }
+        else {
+            letterModel.set(0,{"possible":0})
+            letterModel.set(0,{"possible":1})
 
+        }
+
+    }
     //property int time_current: 0 // Value for the progress timer*1000
     property string currentWord:"" // Word under creation
     property string words:"" // Words, list
@@ -45,7 +56,7 @@ Page {
             MenuItem {
                 text: qsTr("Start")
                 onClicked: {
-                    Myfreq.findLetters("finnish")
+                    Myfreq.findLetters(selectedLanguage)
                     p_timer = true
                     //time_current = 0
                     progress.value = max_time
@@ -218,12 +229,11 @@ Page {
                             letterModel.set(i,{"possible":1})
                             letterModel.set(i,{"temp_possible":1})
                         }
-                        if (player_id > 1) {
+                        if(usend.cmove != "NO_CONNECTION") {
                             usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
                             usend.broadcastDatagram()}
                         else {
-                            usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
-                            usend.broadcastDatagram()
+                            Myan.analyze(player_id + "," + myPlayerName + ",WORDS," + words)
                         }
                     }
                 }
@@ -266,8 +276,13 @@ Page {
             repeat: true
             interval: 3000
             onTriggered: {
-                usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
-                usend.broadcastDatagram()
+                if(usend.cmove != "NO_CONNECTION") {
+                    usend.sipadd = player_id + "," + myPlayerName + ",PLAYERS," + playerlist
+                    usend.broadcastDatagram()
+                }
+                else {
+                    Myan.analyze(player_id + "," + myPlayerName + ",PLAYERS," + playerlist)
+                }
 
             }
         }

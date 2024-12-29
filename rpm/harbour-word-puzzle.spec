@@ -1,7 +1,7 @@
 Name:       harbour-word-puzzle
 
 Summary:    Word puzzle application
-Version:    0.1.5
+Version:    0.1.6
 Release:    1
 License:    BSD
 URL:        https://github.com/Rikujolla/harbour-word-puzzle
@@ -14,7 +14,8 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
 
 %description
-The idea of the game is to make words by selecting letters. The game is at its best when having multiple devices on the same LAN.
+In the game words are made by selecting letters with multiple devices
+on the same LAN.
 
 
 %prep

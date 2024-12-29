@@ -163,15 +163,35 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Player ID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Game endurance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Player settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sophia5</source>
+        <extracomment>Typical woman name in the country adding number to give a hint for the format</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Words language</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>harbour-word-puzzle</name>
+    <message>
+        <source>English</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finnish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swedish</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
