@@ -1,7 +1,7 @@
 Name:       harbour-word-puzzle
 
 Summary:    Word puzzle application
-Version:    0.1.6
+Version:    0.1.7
 Release:    1
 License:    BSD
 URL:        https://github.com/Rikujolla/harbour-word-puzzle

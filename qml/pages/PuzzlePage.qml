@@ -22,7 +22,6 @@ Page {
         }
 
     }
-    //property int time_current: 0 // Value for the progress timer*1000
     property string currentWord:"" // Word under creation
     property string words:"" // Words, list
 
@@ -58,33 +57,24 @@ Page {
                 onClicked: {
                     Myfreq.findLetters(selectedLanguage)
                     p_timer = true
-                    //time_current = 0
                     progress.value = max_time
                     words = ""
                     myWords = ""
                     currentWord = ""
-                    //canvaas.requestPaint()
-                    if (status == 0 && player_id==1) {
-                        Myan.analyze(player_id + "," + myPlayerName + ",SET," + letterlist)// If not networked to ensure
+                    if (usend.cmove != "NO_CONNECTION") {
                         usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
                         usend.broadcastDatagram()
-
                     }
                     else {
                         Myan.analyze(player_id + "," + myPlayerName + ",SET," + letterlist)// If not networked to ensure
-                        usend.sipadd = player_id + "," + myPlayerName + ",SET," + letterlist
-                        usend.broadcastDatagram()
-
                     }
                     commTimer.stop
                     Mysets.clearTables()
-                    //zeropointwords = ""
 
                     for (var i = 0; i<16; i++ ) {
                         letterModel.set(i,{"possible":1})
                         letterModel.set(i,{"temp_possible":1})
                     }
-
                 }
             }
         }
@@ -103,10 +93,6 @@ Page {
                 title: qsTr("Word puzzle")
             }
 
-            /*UdpSender {
-                id:usend
-            }*/
-
             UdpReceiver {
                 id:urecei
                 onRmoveChanged: {
@@ -122,11 +108,9 @@ Page {
                 Timer {
                     id:progress_timer
                     interval: 100
-                    //running: p_timer && time_current >= 0
                     repeat:true
                     running: p_timer
                     onTriggered: {
-                        //time_current = time_current + progress_timer.interval
                         progress.value = progress.value - interval/1000
                     }
                 }
@@ -160,7 +144,6 @@ Page {
                                 ctx.lineWidth = "4";
                                 ctx.rect(0, 0, width, height);
                                 ctx.fillStyle = "blue"; // Set text color to blue
-                                //console.log(Theme.fontSizeExtraLarge, Theme.fontSizeHuge, Theme.fontSizeLarge, Theme.fontSizeMedium, Theme.fontSizeSmall)
                                 ctx.font= Theme.fontSizeHuge + 'px ' + Theme.fontFamily;
                                 ctx.textAlign = "center";
                                 ctx.rotate(rotation_rad)

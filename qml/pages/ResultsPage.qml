@@ -76,8 +76,6 @@ Page {
                     Label {
                         text: player + ": " + points + " " + qsTr("points")
                         x: Theme.paddingLarge
-
-                        //anchors.centerIn: parent
                     }
                 }
             }
@@ -124,7 +122,6 @@ Page {
                             font.italic: colorerr ? true : false
                             color: colorerr ? Theme.errorColor : Theme.primaryColor
                             anchors.verticalCenter: parent.verticalCenter
-                            //verticalAlignment: bg.verticalCenter
                             text: word + "; " + mypoints + "; " + players
                         }
                     }

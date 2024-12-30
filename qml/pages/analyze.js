@@ -24,7 +24,6 @@ function analyze(_move) {
         numberOfPlayers = _playerlist.length
     }
 
-    //if (message[2] == "SET" && player_id > 1 ) {
     if (message[2] == "SET") {
 
         if (debug) {console.log("analyze_SET", _letterlist[2], letterlist)}
@@ -167,10 +166,10 @@ function fillResults() {
 
                 // Append valid words to wordModel
                 if (totalDownvotes > 0){
-                    wordModel.append({word: word, mypoints: playerPoints + 1, players: players, colorerr: true});
+                    wordModel.append({word: word, mypoints: playerPoints, players: players, colorerr: true});
                 }
                 else {
-                    wordModel.append({word: word, mypoints: playerPoints + 1, players: players});
+                    wordModel.append({word: word, mypoints: playerPoints, players: players});
                 }
 
                 // Update points for each player who contributed to this word

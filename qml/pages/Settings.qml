@@ -140,37 +140,6 @@ Page {
                 }
             }
 
-            /*Row {
-                x: Theme.paddingLarge
-                spacing: Theme.paddingMedium
-                visible: playMode == "othDevice"
-                Text {
-                    text: qsTr("Player ID")
-                    color: Theme.secondaryHighlightColor
-                    x: Theme.paddingLarge
-                    font.pixelSize: Theme.fontSizeSmall
-                    width:page.width/2
-                    wrapMode: Text.WordWrap
-                }
-
-                TextField {
-                    id: playerIdBox
-                    placeholderText: "ID"
-                    text:player_id
-                    width: page.width/2
-                    validator: RegExpValidator { regExp: /^\d*\.?\d*$/ }
-                    color: errorHighlight? "red" : Theme.primaryColor
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    EnterKey.enabled: !errorHighlight
-                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                    EnterKey.onClicked: {
-                        focus = false
-                        player_id = playerIdBox.text
-                        Mysets.saveSettings()
-                    }
-                }
-            }*/
-
             SectionHeader { text: qsTr("Words language")}
 
             ColumnView {
@@ -203,7 +172,6 @@ Page {
 
             VerticalScrollDecorator {}
 
-            //loppusulkeet
         }
     }
 }

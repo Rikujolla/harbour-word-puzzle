@@ -11,6 +11,9 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Mon Dec 30 2024 Riku Lahtinen <rikul.lajolla@kiu.as> 0.1.7
+- Points bug repaired on ResultsPage view
+- Code cleaning done
 
 * Sun Dec 29 2024 Riku Lahtinen <rikul.lajolla@kiu.as> 0.1.6
 - Words language setting possible (English, Finnish, Swedish)

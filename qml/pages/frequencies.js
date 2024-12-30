@@ -129,7 +129,6 @@ function findLetters(lang) {
         letterModel.set(i,{"temp_possible":1})
 
         var rand_rot = Math.floor(Math.random()* 4)
-        //if (debug){console.log(rand_rot)}
         if (rand_rot==0) {letterModel.set(i,{"rotation_rad":0})}
         else if (rand_rot == 1) {letterModel.set(i,{"rotation_rad":1.571})}
         else if (rand_rot == 2) {letterModel.set(i,{"rotation_rad":3.142})}

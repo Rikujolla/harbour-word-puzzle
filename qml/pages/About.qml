@@ -34,7 +34,6 @@ Page {
         anchors.fill: parent
 
         /*PullDownMenu {
-
             MenuItem {
                 text: qsTr("Back to settings")
                 onClicked: pageStack.pop()
@@ -70,7 +69,7 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 //: The name of the app followed with a version number
-                text: {qsTr("Word puzzle, version") + " 0.1.6"}
+                text: {qsTr("Word puzzle, version") + " 0.1.7"}
             }
 
             SectionHeader { text: qsTr("Idea") }
