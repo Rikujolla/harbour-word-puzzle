@@ -23,12 +23,10 @@ ApplicationWindow {
     property bool debug: false // In releases, set this false
     property string playerlist: ""
     property string letterlist:"" //Perhaps empty string needs to be changed
-    //property string fullLetterlist:"" //Letters, rotations and statuses
     property string zeropointwords: "" //Words that all the players had giving zero points
     property string vastedwords:""
     property string myWords:"" //For display to enable wordWrap
     property bool p_timer:false //
-    property int errortimer: 60000 // To stop error timer
     property var languages: [{lng:"english", lngtr:qsTr("English")},
         {lng:"finnish", lngtr:qsTr("Finnish")},
         {lng:"swedish", lngtr:qsTr("Swedish")}
@@ -64,21 +62,11 @@ ApplicationWindow {
     }
     ListModel {
         id:languageModel
-        /*ListElement {
-            language:"english"
-            selected: false
-            colorsel:"notsel"
-        }*/
         ListElement {
             language:"finnish"
             selected: true
             colorsel:"sel"
         }
-        /*ListElement {
-            language:"swedish"
-            selected: false
-            colorsel:"notsel"
-        }*/
     }
 
     UdpSender {

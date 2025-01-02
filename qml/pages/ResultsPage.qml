@@ -33,11 +33,6 @@ import harbour.word.puzzle.receiver 1.0
 Page {
     id:page
 
-    /*onStatusChanged: {
-        if (page.status === 2) {
-        }
-    }*/
-
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: mainColumn.height

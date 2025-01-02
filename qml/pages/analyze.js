@@ -26,13 +26,10 @@ function analyze(_move) {
 
     if (message[2] == "SET") {
 
-        //Mysets.clearTables()
-
         if (debug) {console.log("analyze_SET", _letterlist[2], letterlist)}
         letterModel.clear();
         for (i=3;i<_letterlist.length-1;i++){
             if ((i-3)%2==0){
-                //saveLetters((i-3)/2,_letterlist[i],_letterlist[i+1], 1, 1)
                 letterModel.set((i-3)/2,{"letter":_letterlist[i]})
                 letterModel.set((i-3)/2,{"rotation_rad":parseFloat(_letterlist[i+1])})
                 letterModel.set((i-3)/2,{"possible":1})
@@ -46,11 +43,6 @@ function analyze(_move) {
         midfield.text = currentWord
         myWords = ""
         words = ""
-        /*for (i = 0; i<16; i++ ) {
-            letterModel.set(i,{"possible":1})
-            letterModel.set(i,{"temp_possible":1})
-        }*/
-        //loadLetters();
     }
 
     if (message[2] == "WORDS") {
@@ -75,7 +67,6 @@ function saveLetters(ind, lett, rotat, poss, tposs){
         // Create the table if it does not exist
         tx.executeSql('CREATE TABLE IF NOT EXISTS Letter (id INTEGER PRIMARY KEY, letter TEXT, rotation REAL, possible INTEGER, temp_possible INTEGER)');
         tx.executeSql('INSERT OR REPLACE INTO Letter (id, letter, rotation, possible, temp_possible) VALUES (?, ?, ?, ?, ?)', [ind,lett,rotat, poss, tposs]);
-        //console.log(ind,lett,rotat, poss, tposs)
     })
 };
 
@@ -85,14 +76,12 @@ function loadLetters() {
         // Create the table if it does not exist
         tx.executeSql('CREATE TABLE IF NOT EXISTS Letter (id INTEGER PRIMARY KEY, letter TEXT, rotation REAL, possible INTEGER, temp_possible INTEGER)');
         var rs = tx.executeSql('SELECT * FROM Letter');
-        //console.log("LoadLetters", rs.rows.length)
         letterModel.clear();
         for (var i = 0; i < rs.rows.length; i++) {
             letterModel.set(i,{"letter":rs.rows.item(i).letter})
             letterModel.set(i,{"rotation_rad":rs.rows.item(i).rotation})
             letterModel.set(i,{"possible":rs.rows.item(i).possible})
             letterModel.set(i,{"temp_possible":rs.rows.item(i).temp_possible})
-            //console.log(i,letterModel.get(i).letter, letterModel.get(i).rotation_rad, letterModel.get(i).possible, letterModel.get(i).temp_possible)
         }
     })
 };
@@ -218,6 +207,29 @@ function fillResults() {
             }
         }
     });
+
+    // Assuming pointsModel has been populated already
+    var pointsArray = [];
+
+    // Extract data from pointsModel into an array
+    for (var i = 0; i < pointsModel.count; i++) {
+        var item = pointsModel.get(i);
+        pointsArray.push({player: item.player, points: item.points});
+    }
+
+    // Sort the array in descending order by points
+    pointsArray.sort(function(a, b) {
+        return b.points - a.points; // Descending order
+    });
+
+    // Clear the pointsModel
+    pointsModel.clear();
+
+    // Re-populate pointsModel with sorted data
+    for (var j = 0; j < pointsArray.length; j++) {
+        pointsModel.append(pointsArray[j]);
+    }
+
 }
 
 function deleteWord(wrd, playr) {

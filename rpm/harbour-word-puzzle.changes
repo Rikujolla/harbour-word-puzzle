@@ -11,6 +11,11 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Thu Jan 2 2025 Riku Lahtinen <rikul.lajolla@kiu.as> 0.1.9
+- Ordering results descending
+- Code cleaning
+- Ready for the first release to Jolla Harbour?
+
 * Thu Jan 2 2025 Riku Lahtinen <rikul.lajolla@kiu.as> 0.1.8
 - Gridview updated when minimized and restored
 - Version for chum testing only

@@ -12,7 +12,6 @@ function clearTables () {
                     tx.executeSql('DELETE FROM Results');
                     tx.executeSql('DELETE FROM Votes');
                     tx.executeSql('DELETE FROM Abandon');
-                    //tx.executeSql('DELETE FROM Letter');
                     playerlist = ""
                     zeropointwords = ""
                     myWords = ""

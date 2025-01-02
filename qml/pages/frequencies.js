@@ -136,11 +136,9 @@ function findLetters(lang) {
 
         if (letterlist == "") {
             letterlist = letterModel.get(i).letter + "," + letterModel.get(i).rotation_rad
-            //fullLetterlist = letterModel.get(i).letter + "," + letterModel.get(i).rotation_rad + "," + letterModel.get(i).possible + "," +letterModel.get(i).temp_possible
-        }
+       }
         else {
             letterlist = letterlist + "," + letterModel.get(i).letter + "," + letterModel.get(i).rotation_rad
-            //fullLetterlist = fullLetterlist + "," + letterModel.get(i).letter + "," + letterModel.get(i).rotation_rad + "," + letterModel.get(i).possible + "," +letterModel.get(i).temp_possible
         }
         Myan.saveLetters(i,letterModel.get(i).letter, letterModel.get(i).rotation_rad, letterModel.get(i).possible, letterModel.get(i).temp_possible)
     }
