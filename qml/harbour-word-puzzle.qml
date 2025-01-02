@@ -23,6 +23,7 @@ ApplicationWindow {
     property bool debug: false // In releases, set this false
     property string playerlist: ""
     property string letterlist:"" //Perhaps empty string needs to be changed
+    //property string fullLetterlist:"" //Letters, rotations and statuses
     property string zeropointwords: "" //Words that all the players had giving zero points
     property string vastedwords:""
     property string myWords:"" //For display to enable wordWrap
@@ -38,9 +39,9 @@ ApplicationWindow {
         id: letterModel
         ListElement {
             letter: "A"
+            rotation_rad: 0
             possible: 1
             temp_possible : 1
-            rotation_rad: 0
         }
     }
 

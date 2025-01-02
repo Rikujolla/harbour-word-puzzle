@@ -7,10 +7,12 @@ function clearTables () {
                     tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT, downvote INTEGER, UNIQUE(word, player))');
                     tx.executeSql('CREATE TABLE IF NOT EXISTS Votes (word TEXT, player TEXT, UNIQUE(word, player))');
                     tx.executeSql('CREATE TABLE IF NOT EXISTS Abandon (word TEXT, UNIQUE(word))');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS Letter (id INTEGER PRIMARY KEY, letter TEXT, rotation REAL, possible INTEGER, temp_possible INTEGER)');
                     tx.executeSql('DELETE FROM Words');
                     tx.executeSql('DELETE FROM Results');
                     tx.executeSql('DELETE FROM Votes');
                     tx.executeSql('DELETE FROM Abandon');
+                    //tx.executeSql('DELETE FROM Letter');
                     playerlist = ""
                     zeropointwords = ""
                     myWords = ""

@@ -11,17 +11,36 @@ import harbour.word.puzzle.receiver 1.0
 Page {
     id: page
     onStatusChanged:{
-        if (letterModel.get(0).possible == 0 ){
+        //console.log("page", page.status, Qt.ApplicationActive)
+
+        if (page.status === 2) {Myan.loadLetters()}
+        else if (page.status === 3){
+            for (var i = 0; i < 16; i++) {
+                Myan.saveLetters(i,letterModel.get(i).letter, letterModel.get(i).rotation_rad, letterModel.get(i).possible, letterModel.get(i).temp_possible)
+            }
+
+            //console.log("page", page.status, Qt.ApplicationActive)
+            /*if (letterModel.get(0).possible == 0 ){
             letterModel.set(0,{"possible":1})
             letterModel.set(0,{"possible":0})
         }
         else {
             letterModel.set(0,{"possible":0})
             letterModel.set(0,{"possible":1})
-
+        }*/
         }
-
     }
+    onVisibleChanged: {
+        //console.log("visible", page.visible, Qt.ApplicationActive)
+        // Updates lettergridview when minimized and restored
+        if (visible){Myan.loadLetters()}
+        else if (letterModel.count == 16){
+            for (var i = 0; i < 16; i++) {
+                Myan.saveLetters(i,letterModel.get(i).letter, letterModel.get(i).rotation_rad, letterModel.get(i).possible, letterModel.get(i).temp_possible)
+            }
+        }
+    }
+
     property string currentWord:"" // Word under creation
     property string words:"" // Words, list
 
@@ -43,15 +62,12 @@ Page {
                 text: qsTr("Settings")
                 onClicked: pageStack.animatorPush(Qt.resolvedUrl("Settings.qml"))
             }
-            MenuItem {
-                text: qsTr("Results")
+            /*MenuItem {
+                text: qsTr("Refresh")
                 onClicked: {
-                    usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
-                    usend.broadcastDatagram()
-                    zeropointwords = "" //REMOVE??
-                    pageStack.animatorPush(Qt.resolvedUrl("ResultsPage.qml"))
+                    Myan.loadLetters()
                 }
-            }
+            }*/
             MenuItem {
                 text: qsTr("Start")
                 onClicked: {
@@ -71,10 +87,20 @@ Page {
                     commTimer.stop
                     Mysets.clearTables()
 
-                    for (var i = 0; i<16; i++ ) {
+                    /*for (var i = 0; i<16; i++ ) {
                         letterModel.set(i,{"possible":1})
                         letterModel.set(i,{"temp_possible":1})
-                    }
+                    }*/
+                }
+            }
+            MenuItem {
+                text: qsTr("Results")
+                visible: progress.value < max_time
+                onClicked: {
+                    usend.sipadd = player_id + "," + myPlayerName + ",WORDS," + words
+                    usend.broadcastDatagram()
+                    zeropointwords = "" //REMOVE??
+                    pageStack.animatorPush(Qt.resolvedUrl("ResultsPage.qml"))
                 }
             }
         }
@@ -162,6 +188,7 @@ Page {
                                     currentWord = currentWord + letterModel.get(index).letter
                                     midfield.text = currentWord
                                     possible = 0
+                                    //Myan.saveLetters(index,letter,rotation_rad,possible, temp_possible)
                                     Mylegal.hideImpossible(index)
                                 }
                             }
@@ -183,6 +210,16 @@ Page {
                         //Clear the word
                         currentWord = ""
                         midfield.text = currentWord
+                        //canvaas.requestPaint();
+                        if (letterModel.get(0).possible == 0 ){
+                            letterModel.set(0,{"possible":1})
+                            letterModel.set(0,{"possible":0})
+                        }
+                        else {
+                            letterModel.set(0,{"possible":0})
+                            letterModel.set(0,{"possible":1})
+                        }
+
                         for (var i = 0; i<16; i++ ) {
                             letterModel.set(i,{"possible":1})
                             letterModel.set(i,{"temp_possible":1})

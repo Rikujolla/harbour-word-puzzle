@@ -69,7 +69,7 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 //: The name of the app followed with a version number
-                text: {qsTr("Word puzzle, version") + " 0.1.7"}
+                text: {qsTr("Word puzzle, version") + " 0.1.8"}
             }
 
             SectionHeader { text: qsTr("Idea") }

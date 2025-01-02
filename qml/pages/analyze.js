@@ -26,17 +26,17 @@ function analyze(_move) {
 
     if (message[2] == "SET") {
 
+        //Mysets.clearTables()
+
         if (debug) {console.log("analyze_SET", _letterlist[2], letterlist)}
         letterModel.clear();
         for (i=3;i<_letterlist.length-1;i++){
             if ((i-3)%2==0){
+                //saveLetters((i-3)/2,_letterlist[i],_letterlist[i+1], 1, 1)
                 letterModel.set((i-3)/2,{"letter":_letterlist[i]})
                 letterModel.set((i-3)/2,{"rotation_rad":parseFloat(_letterlist[i+1])})
                 letterModel.set((i-3)/2,{"possible":1})
                 letterModel.set((i-3)/2,{"temp_possible":1})
-
-            }
-            else {
 
             }
         }
@@ -46,12 +46,11 @@ function analyze(_move) {
         midfield.text = currentWord
         myWords = ""
         words = ""
-        for (i = 0; i<16; i++ ) {
+        /*for (i = 0; i<16; i++ ) {
             letterModel.set(i,{"possible":1})
             letterModel.set(i,{"temp_possible":1})
-        }
-
-        Mysets.clearTables()
+        }*/
+        //loadLetters();
     }
 
     if (message[2] == "WORDS") {
@@ -60,15 +59,43 @@ function analyze(_move) {
     }
 
     if (message[2] == "DOWNVOTE") {
-         if (debug) {console.log("Downvote", message[2], message)}
+        if (debug) {console.log("Downvote", message[2], message)}
         deleteWord(message[3], message[1])
     }
 
     if (message[2] == "REFRESH") {
-         if (debug) {console.log("Refresh", message[2], message)}
+        if (debug) {console.log("Refresh", message[2], message)}
         fillResults()
     }
 }
+
+function saveLetters(ind, lett, rotat, poss, tposs){
+    var db = LocalStorage.openDatabaseSync("WordPuzzleDB", "1.0", "Memory database", 1000000);
+    db.transaction(function (tx) {
+        // Create the table if it does not exist
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Letter (id INTEGER PRIMARY KEY, letter TEXT, rotation REAL, possible INTEGER, temp_possible INTEGER)');
+        tx.executeSql('INSERT OR REPLACE INTO Letter (id, letter, rotation, possible, temp_possible) VALUES (?, ?, ?, ?, ?)', [ind,lett,rotat, poss, tposs]);
+        //console.log(ind,lett,rotat, poss, tposs)
+    })
+};
+
+function loadLetters() {
+    var db = LocalStorage.openDatabaseSync("WordPuzzleDB", "1.0", "Memory database", 1000000);
+    db.transaction(function (tx) {
+        // Create the table if it does not exist
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Letter (id INTEGER PRIMARY KEY, letter TEXT, rotation REAL, possible INTEGER, temp_possible INTEGER)');
+        var rs = tx.executeSql('SELECT * FROM Letter');
+        //console.log("LoadLetters", rs.rows.length)
+        letterModel.clear();
+        for (var i = 0; i < rs.rows.length; i++) {
+            letterModel.set(i,{"letter":rs.rows.item(i).letter})
+            letterModel.set(i,{"rotation_rad":rs.rows.item(i).rotation})
+            letterModel.set(i,{"possible":rs.rows.item(i).possible})
+            letterModel.set(i,{"temp_possible":rs.rows.item(i).temp_possible})
+            //console.log(i,letterModel.get(i).letter, letterModel.get(i).rotation_rad, letterModel.get(i).possible, letterModel.get(i).temp_possible)
+        }
+    })
+};
 
 function saveWords(msg) {
 
@@ -83,11 +110,11 @@ function saveWords(msg) {
         // Check if the row already exists
         var rs = tx.executeSql('SELECT * FROM Words WHERE id = ? AND player = ?', [_msg[0], _msg[1]]);
         if (rs.rows.length > 0) {
-             if (debug) {console.log("Updating existing row...")};
+            if (debug) {console.log("Updating existing row...")};
             // Update the message if the row exists
             tx.executeSql('UPDATE Words SET message = ? WHERE id = ? AND player = ?', [msg, _msg[0], _msg[1]]);
         } else {
-             if (debug) {console.log("Inserting new row...")};
+            if (debug) {console.log("Inserting new row...")};
             // Insert a new row if it doesn't exist
             tx.executeSql('INSERT INTO Words (id, player, message) VALUES (?, ?, ?)', [_msg[0], _msg[1], msg]);
         }
@@ -151,7 +178,7 @@ function fillResults() {
             // Check if the word is valid based on downvotes, sinle player mode
             else if (totalDownvotes <= Math.floor(_pla_length / 2) && _pla_length < 2) {
                 // Append valid words to wordModel
-                    wordModel.append({word: word, mypoints: playerPoints + 1, players: players});
+                wordModel.append({word: word, mypoints: playerPoints + 1, players: players});
                 //}
 
                 // Update points for each player who contributed to this word
@@ -203,6 +230,6 @@ function deleteWord(wrd, playr) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT, downvote INTEGER, UNIQUE(word, player))');
         tx.executeSql('CREATE TABLE IF NOT EXISTS Votes (word TEXT, player TEXT, UNIQUE(word, player))');
         tx.executeSql('INSERT OR IGNORE INTO Votes (word, player) VALUES (?, ?)', [wrd, playr]);
-         if (debug) {console.log(wrd,playr)}
+        if (debug) {console.log(wrd,playr)}
     })
 }

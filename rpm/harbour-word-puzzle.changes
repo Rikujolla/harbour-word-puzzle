@@ -11,6 +11,10 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Thu Jan 2 2025 Riku Lahtinen <rikul.lajolla@kiu.as> 0.1.8
+- Gridview updated when minimized and restored
+- Version for chum testing only
+
 * Mon Dec 30 2024 Riku Lahtinen <rikul.lajolla@kiu.as> 0.1.7
 - Points bug repaired on ResultsPage view
 - Code cleaning done
