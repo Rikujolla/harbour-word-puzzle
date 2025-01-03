@@ -26,6 +26,8 @@ function analyze(_move) {
 
     if (message[2] == "SET") {
 
+        Mysets.clearTables()
+
         if (debug) {console.log("analyze_SET", _letterlist[2], letterlist)}
         letterModel.clear();
         for (i=3;i<_letterlist.length-1;i++){
@@ -242,6 +244,7 @@ function deleteWord(wrd, playr) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS Results (word TEXT, player TEXT, downvote INTEGER, UNIQUE(word, player))');
         tx.executeSql('CREATE TABLE IF NOT EXISTS Votes (word TEXT, player TEXT, UNIQUE(word, player))');
         tx.executeSql('INSERT OR IGNORE INTO Votes (word, player) VALUES (?, ?)', [wrd, playr]);
+        fillResults();
         if (debug) {console.log(wrd,playr)}
     })
 }

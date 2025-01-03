@@ -67,7 +67,7 @@ Page {
                         Myan.analyze(player_id + "," + myPlayerName + ",SET," + letterlist)// If not networked to ensure
                     }
                     commTimer.stop
-                    Mysets.clearTables()
+                    //Mysets.clearTables() not needed here
 
                 }
             }

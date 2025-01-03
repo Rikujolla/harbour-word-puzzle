@@ -11,6 +11,10 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Fri Jan 3 2025 Riku Lahtinen <rikul.lajolla@kiu.as> 0.2.0
+- Repairing database clearing bug
+- Assure results update when deleting words
+
 * Thu Jan 2 2025 Riku Lahtinen <rikul.lajolla@kiu.as> 0.1.9
 - Ordering results descending
 - Code cleaning
