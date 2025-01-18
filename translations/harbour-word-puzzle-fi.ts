@@ -194,5 +194,37 @@
         <source>Swedish</source>
         <translation>ruotsi</translation>
     </message>
+    <message>
+        <source>French</source>
+        <translation>ranska</translation>
+    </message>
+    <message>
+        <source>German</source>
+        <translation>saksa</translation>
+    </message>
+    <message>
+        <source>Spanish</source>
+        <translation>espanja</translation>
+    </message>
+    <message>
+        <source>Italian</source>
+        <translation>italia</translation>
+    </message>
+    <message>
+        <source>Portuguese</source>
+        <translation>portugali</translation>
+    </message>
+    <message>
+        <source>Dutch</source>
+        <translation>hollanti</translation>
+    </message>
+    <message>
+        <source>Russian</source>
+        <translation>venäjä</translation>
+    </message>
+    <message>
+        <source>Ukrainian</source>
+        <translation>ukraina</translation>
+    </message>
 </context>
 </TS>

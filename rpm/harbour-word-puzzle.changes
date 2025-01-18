@@ -11,6 +11,10 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Sat Jan 18 2025 Riku Lahtinen <rikul.lajolla@kiu.as> 0.2.1
+- New release candidate for Jolla Harbour
+- More languages
+
 * Fri Jan 3 2025 Riku Lahtinen <rikul.lajolla@kiu.as> 0.2.0
 - Repairing database clearing bug
 - Assure results update when deleting words

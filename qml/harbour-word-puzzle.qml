@@ -27,9 +27,17 @@ ApplicationWindow {
     property string vastedwords:""
     property string myWords:"" //For display to enable wordWrap
     property bool p_timer:false //
-    property var languages: [{lng:"english", lngtr:qsTr("English")},
+    property var languages: [{lng:"dutch", lngtr:qsTr("Dutch")},
+        {lng:"english", lngtr:qsTr("English")},
         {lng:"finnish", lngtr:qsTr("Finnish")},
-        {lng:"swedish", lngtr:qsTr("Swedish")}
+        {lng:"french", lngtr:qsTr("French")},
+        {lng:"german", lngtr:qsTr("German")},
+        {lng:"italian", lngtr:qsTr("Italian")},
+        {lng:"portuguese", lngtr:qsTr("Portuguese")},
+        {lng:"russian", lngtr:qsTr("Russian")},
+        {lng:"spanish", lngtr:qsTr("Spanish")},
+        {lng:"swedish", lngtr:qsTr("Swedish")},
+        {lng:"ukrainian", lngtr:qsTr("Ukrainian")}
     ]
 
 
